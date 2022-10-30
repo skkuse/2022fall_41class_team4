@@ -1,17 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
 import ProblemList from './ProblemList';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+    <BrowserRouter>
       <div>
-        <ProblemList />
+        <h1 className="text-3xl font-bold underline">
+          Hello world!
+        </h1>
+        <div>
+          <Routes>
+            <Route path="/" element={<ProblemList />} />
+            {/* <Route path="/problems/" element={<ProblemDetail />} /> */}
+          </Routes>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 

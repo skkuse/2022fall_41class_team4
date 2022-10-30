@@ -1,21 +1,12 @@
 import React from "react";
 import axios from "axios";
 import Tr from "./Tr";
+import { Link } from "react-router-dom";
 
 class ProblemList extends React.Component {
-
     state = {
         ProblemData: [],
     };
-
-    // // 임시 데이터 형식
-    // state = {
-    //     id: 0,
-    //     name: "",
-    //     email: "",
-    //     phone: "",
-    //     website: "",
-    // }
 
     getProblemData = () => {
         // 임시 데이터 호출
@@ -24,11 +15,7 @@ class ProblemList extends React.Component {
         axios.get(base + "users")
             .then(
                 (res) => {
-
-                    // debug
-                    console.log(res);
-                    console.log("HI");
-                    console.log(res.data);
+                    // console.log(res.data);
 
                     // 반환 형식 아직 정의되지 않음, 임시
                     this.setState({
@@ -68,6 +55,7 @@ class ProblemList extends React.Component {
 
             </div>
         );
+
     };
 
 };

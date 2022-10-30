@@ -1,12 +1,9 @@
 import React from "react";
 import Td from "./Td";
+import { Link } from "react-router-dom";
 
 class Tr extends React.Component {
-
-
     render() {
-        console.log(this.props.ProblemData);
-
         return (
             <tbody>
                 {
@@ -16,7 +13,7 @@ class Tr extends React.Component {
                         );
                     })
                 }
-            </tbody>
+            </tbody >
         );
     };
 };
