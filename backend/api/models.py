@@ -20,6 +20,7 @@ class testCase(models.Model):
     problem = models.ForeignKey('Problem', related_name="testCases", on_delete=models.CASCADE)
 
 
+#ref from https://www.coninggu.com/8
 class UserManager(BaseUserManager):
 	# 필수로 필요한 데이터를 선언
     def create_user(self, email, username, password):
