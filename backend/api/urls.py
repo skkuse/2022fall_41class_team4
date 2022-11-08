@@ -4,6 +4,7 @@ from .views import *
 
 
 urlpatterns = [
-   path('problemlist/', ProblemListAPI)
-
+   path('problemlist/', ProblemListAPI),
+   path('problem/<int:problem_id>', ProblemAPI),
+   path('users/', UsersAPI)
 ]
