@@ -27,6 +27,12 @@
 .App-link {
   color: #61dafb;
 }
+.related{
+  background-color: grey;
+  width: 50vh;
+  margin: auto;
+  font-size: 2rem;
+}
 
 @keyframes App-logo-spin {
   from {
@@ -35,4 +41,20 @@
   to {
     transform: rotate(360deg);
   }
+}
+.explain h1{
+  background-color: grey;
+  font-size: 2rem;
+  font-weight: bold;
+  color: red;
+  width: 50vh;
+  margin: auto;
+}
+.explain h2{
+  background-color: grey;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  width: 50vh;
+  margin: auto;
 }
