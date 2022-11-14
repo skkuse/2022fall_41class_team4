@@ -22,7 +22,7 @@ class ProblemSerializer(serializers.ModelSerializer):
         model = Problem
         fields = ('id', 'name', 'description', 'testCases')
 
-# class UsersSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Users
-#         fields = ('user_id', 'user_name', 'user_email')
+class UsersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'username', 'password','is_active','is_admin')

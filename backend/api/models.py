@@ -35,18 +35,26 @@ class UserManager(BaseUserManager):
         return user
     
     # python manage.py createsuperuser 사용 시 해당 함수가 사용됨
-    def create_superuser(self, email, username, password):
-        user = self.create_user(
-            email=email,
-            username=username,
-            password=password
-        )
-        user.is_admin = True
-        user.save(using=self._db)
+    # def create_superuser(self, email, username, password):
+    #     user = self.create_user(
+    #         email=email,
+    #         username=username,
+    #         password=password
+    #     )
+    #     user.is_admin = True
+    #     user.save(using=self._db)
+    #     return user    
+    def create_superuser(self, email, password, **kwargs):         
+        user = self.model(email=email, is_staff=True, is_superuser=True, **kwargs)         
+        user.set_password(password)         
+        user.save()         
         return user
 
+    
+
 class User(AbstractUser):
-    email = models.EmailField(max_length=255, unique=True)
+    id = models.BigAutoField(primary_key=True)
+    email = models.EmailField(unique=True)
     username = models.CharField(max_length=16)
     password = models.CharField(max_length=16)
     is_active = models.BooleanField(default=True)
@@ -56,7 +64,7 @@ class User(AbstractUser):
         db_table = 'user'
     objects = UserManager()
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS= ['username']
+    REQUIRED_FIELDS= []
 
 
 # custom user model 사용 시 UserManager 클래스와 create_user, create_superuser 함수가 정의되어 있어야 함
