@@ -3,6 +3,8 @@ import './App.css';
 import ProblemList from './ProblemList';
 import Left from './Left';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Explanation from './Explanation';
+import Related from './Related'
 
 function App() {
   return (
@@ -16,8 +18,12 @@ function App() {
             <Route path="/" element={<ProblemList />} />
             <Route path="/hhg" element={<Left />} />
             {/* <Route path="/problems/" element={<ProblemDetail />} /> */}
+           
+          
           </Routes>
         </div>
+        {<Explanation title="asdf" />}
+        {<Related/>}
       </div>
     </BrowserRouter>
   );
