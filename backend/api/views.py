@@ -5,6 +5,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from .models import *
 from .serializer import *
+from django.contrib.auth import  login,get_user_model, authenticate
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -21,12 +23,36 @@ def ProblemAPI(request,problem_id):
     return Response(serializer.data)
     # test case info needed!
 
-@api_view(['POST'])
+@api_view(['POST', 'GET'])
 def UsersAPI(request):
     if request.method == 'POST':
         reqData = request.data
-        serializer = UsersSerializer(data=reqData)
-        if serializer.is_valid():
-            serializer.save()
+        username = reqData['username']
+        email = reqData['email']
+        password = reqData['password']
+        user = get_user_model().objects.create_user(username=username,email=email,password=password)
+        serializer = UsersSerializer(user)
+        #get_user_model().objects.get(id=id)
+        if user:
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(reqData, status=status.HTTP_400_BAD_REQUEST)
+        # serializer = UsersSerializer(data=reqData)
+        # if serializer.is_valid():
+        #     serializer.save()
+        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'GET':
+        pass
+
+@api_view(['POST'])
+def loginAPI(request):
+    if request.method == "POST":
+        reqData = request.data
+        email = reqData['email'] #request.POST.get('email') #['email']
+        #print(f'user email = {email}')
+        password = reqData['password']
+        user = authenticate(request, username=email, password=password)
+        serializer = UsersSerializer(user)
+        if user :
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(f"login failed", status=status.HTTP_400_BAD_REQUEST)
