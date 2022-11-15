@@ -25,8 +25,9 @@ SECRET_KEY = 'django-insecure-yqyn=&svk+1_w-_99&3k0l4x6c$d_%x%!nm&2z3sq*cvcpc8p!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
 
@@ -126,7 +127,3 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-#USER setting
-AUTH_USER_MODEL = 'api.User'
-AUTHENTICATION_BACKENDS = ['api.backend.EmailBackend']
