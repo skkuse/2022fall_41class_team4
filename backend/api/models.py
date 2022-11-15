@@ -74,5 +74,5 @@ class UserProblems(models.Model):
     user_score = models.IntegerField()
     last_date = models.DateField(auto_now_add=True)
     user_code = models.TextField()
-    user = models.ForeignKey('User', related_name="userProblem") 
-    problem = models.ForeignKey('Problem', related_name='userProblem')
+    user = models.ForeignKey('User', related_name="userProblem", on_delete=models.CASCADE) 
+    problem = models.ForeignKey('Problem', related_name='userProblem', on_delete=models.CASCADE)
