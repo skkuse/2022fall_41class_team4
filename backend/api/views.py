@@ -7,6 +7,8 @@ from .models import *
 from .serializer import *
 from django.contrib.auth import  login,get_user_model, authenticate
 from django.contrib.auth.models import User
+import docker
+import backend 
 
 
 # Create your views here.
@@ -56,3 +58,25 @@ def loginAPI(request):
         if user :
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(f"login failed", status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def codeTestAPI(request):
+    if request.method == "POST":
+        #get user code from post req body
+        reqData = request.data
+        userCode = reqData['userCode']
+
+        #make user code py file
+        f = open("./userCodeTest/test.py", 'w')
+        f.write(userCode)
+        f.close()
+
+        #save user code to DB
+        
+
+        #make docker container
+        client = docker.from_env()
+        client.containers.run('image')
+
+        #update userProblem info
+        

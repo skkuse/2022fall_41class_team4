@@ -7,5 +7,6 @@ urlpatterns = [
    path('problemlist/', ProblemListAPI),
    path('problem/<int:problem_id>', ProblemAPI),
    path('users/', UsersAPI),
-   path('login/', loginAPI)
+   path('login/', loginAPI),
+   path('codetest/', codeTestAPI)
 ]

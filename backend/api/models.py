@@ -21,6 +21,8 @@ class testCase(models.Model):
 
 
 #ref from https://www.coninggu.com/8
+# custom user model 사용 시 UserManager 클래스와 
+# create_user, create_superuser 함수가 정의되어 있어야 함
 class UserManager(BaseUserManager):
 	# 필수로 필요한 데이터를 선언
     def create_user(self, email, username, password):
@@ -67,4 +69,10 @@ class User(AbstractUser):
     REQUIRED_FIELDS= []
 
 
-# custom user model 사용 시 UserManager 클래스와 create_user, create_superuser 함수가 정의되어 있어야 함
+class UserProblems(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user_score = models.IntegerField()
+    last_date = models.DateField(auto_now_add=True)
+    user_code = models.TextField()
+    user = models.ForeignKey('User', related_name="userProblem") 
+    problem = models.ForeignKey('Problem', related_name='userProblem')
