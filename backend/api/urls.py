@@ -8,5 +8,5 @@ urlpatterns = [
    path('problem/<int:problem_id>', ProblemAPI),
    path('users/', UsersAPI),
    path('login/', loginAPI),
-   path('codetest/', codeTestAPI)
+   path('testcase/test/', codeTestAPI)
 ]
