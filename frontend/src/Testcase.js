@@ -5,39 +5,52 @@ class Testcase extends Component {
         return (
             <div>
                 <div className="left-header">
-                    Example
+                    테스트 케이스
                 </div>
                 <div className="test-block">
-                    Input 1
-                    <div className="test-line">
-                        100
-                        <span className="test-button">test</span>
+                    <div className="test-header">
+                        테스트 케이스 1
                     </div>
-                    Output 1
-                    <div className="test-line">
-                        1203912039812
+                    <div className="test-inout">
+                        <div className="test-input">
+                            <div className="test-inout-header">
+                                Input:
+                            </div>
+                            <div className="input">
+                                0
+                            </div>
+                        </div>
+                        <div className="test-output">
+                            <div className="test-inout-header">
+                                Output:
+                            </div>
+                            <div className="output">
+                                0
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="test-block">
-                    Input 2
-                    <div className="test-line">
-                        100
-                        <span className="test-button">test</span>
+                    <div className="test-header">
+                        테스트 케이스 2
                     </div>
-                    Output 2
-                    <div className="test-line">
-                        1203912039812
-                    </div>
-                </div>
-                <div className="test-block">
-                    Input 3
-                    <div className="test-line">
-                        100
-                        <span className="test-button">test</span>
-                    </div>
-                    Output 3
-                    <div className="test-line">
-                        1203912039812
+                    <div className="test-inout">
+                        <div className="test-input">
+                            <div className="test-inout-header">
+                                Input:
+                            </div>
+                            <div className="input">
+                                3
+                            </div>
+                        </div>
+                        <div className="test-output">
+                            <div className="test-inout-header">
+                                Output:
+                            </div>
+                            <div className="output">
+                                2
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
