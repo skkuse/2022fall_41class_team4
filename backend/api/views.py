@@ -56,7 +56,7 @@ class AnswerAPI(APIView):
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
 
-class TestCaseLISTAPI(APIView):
+class TestCaseListAPI(APIView):
     # 테스트 케이스 등록
     def post(self, request):
         serializer = TestCaseSerializer(data=request.data)
