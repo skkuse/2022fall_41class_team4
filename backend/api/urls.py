@@ -20,7 +20,7 @@ urlpatterns = [
    path('preset', PresetListAPI.as_view()),
    path('preset/<int:user_id>/<int:problem_id>', PresetAPI.as_view()),
 
-   path('login/', loginAPI),
+   path('login/', loginAPI.as_view()),
    path('testcase/test/', codeTestAPI)
    # path('testcase/test', ExecuteTestCaseAPI.as_view()),
 
