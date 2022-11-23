@@ -184,27 +184,24 @@ class UserListAPI(APIView):
 
 
 # @api_view(['POST', 'GET'])
-# def UserListAPI(request):
-#     # 사용자 등록 (회원가입)
-#     if request.method == 'POST':
-#         reqData = request.data
-#         username = reqData['username']
-#         email = reqData['email']
-#         password = reqData['password']
-#         user = get_user_model().objects.create_user(username=username,email=email,password=password)
-#         serializer = UsersSerializer(user)
-#         #get_user_model().objects.get(id=id)
-#         if user:
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         return Response(reqData, status=status.HTTP_400_BAD_REQUEST)
-#         # serializer = UsersSerializer(data=reqData)
-#         # if serializer.is_valid():
-#         #     serializer.save()
-#         #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-#
-#     elif request.method == 'GET':
-#         pass
+class UserRegisterAPI(APIView):
+    def post(self, request):
+        # 사용자 등록 (회원가입)
+        reqData = request.data
+        username = reqData['username']
+        email = reqData['email']
+        password = reqData['password']
+        user = get_user_model().objects.create_user(username=username,email=email,password=password)
+        serializer = UsersSerializer(user)
+        #get_user_model().objects.get(id=id)
+        if user:
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(reqData, status=status.HTTP_400_BAD_REQUEST)
+        # serializer = UsersSerializer(data=reqData)
+        # if serializer.is_valid():
+        #     serializer.save()
+        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class loginAPI(APIView):
@@ -219,6 +216,7 @@ class loginAPI(APIView):
         if user:
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(f"login failed", status=status.HTTP_400_BAD_REQUEST)
+    
 
 
 #
@@ -238,6 +236,9 @@ class loginAPI(APIView):
 @api_view(['POST'])
 def codeTestAPI(request):
     if request.method == "POST":
+        #init docker client:
+        client = docker.from_env()
+
         #get user code from post req body
         reqData = request.data
         userCode = reqData['userCode']
@@ -247,11 +248,13 @@ def codeTestAPI(request):
         f.write(userCode)
         f.close()
 
+        #build docker file
+
+
         #save user code to DB
         
 
         #make docker container
-        client = docker.from_env()
         client.containers.run('image')
 
         #update userProblem info
