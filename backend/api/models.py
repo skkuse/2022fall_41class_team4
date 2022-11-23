@@ -13,6 +13,11 @@ class Problem(models.Model):
     description = models.TextField()
 
 
+class Answer(models.Model):
+    id = models.BigAutoField(primary_key=True)# NOT NULL
+    problem = models.ForeignKey('Problem', related_name="Answer", on_delete=models.CASCADE)
+    answer_code = models.TextField()
+
 class testCase(models.Model):
     id = models.BigAutoField(primary_key=True)
     testCase_in = models.TextField()
@@ -76,3 +81,12 @@ class UserProblems(models.Model):
     user_code = models.TextField()
     user = models.ForeignKey('User', related_name="userProblem", on_delete=models.CASCADE) 
     problem = models.ForeignKey('Problem', related_name='userProblem', on_delete=models.CASCADE)
+
+class Preset(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey('User', related_name="Preset", on_delete=models.CASCADE)
+    problem = models.ForeignKey('Problem', related_name='Preset', on_delete=models.CASCADE)
+    preset1 = models.TextField()
+    preset2 = models.TextField()
+    preset3 = models.TextField()
+    last_code = models.TextField()
