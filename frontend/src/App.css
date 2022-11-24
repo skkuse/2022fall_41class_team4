@@ -65,14 +65,14 @@
   display: flex;
   justify-content: center;
 }
-#root {
+.Login {
   height: 20vh;
   align-items: center;
   display: flex;
   justify-content: center;
   background-color:  #a0ca4e;
   position: relative;
-  top: 40%;
+  margin-top: 40vh;
 }
 #button{
   background-color: #3e77e0;
@@ -84,6 +84,7 @@
 }
 body{
   height: 100vh;
+  white-space: pre-wrap;
 }
 #email{
   margin-bottom: 0.5vh;
@@ -92,4 +93,49 @@ body{
   display: table;
 }
 .passr{display:table-row;}
-
+#new{
+  margin-top: 1vh;
+  height: auto;
+  width: auto;
+  color: grey;
+  text-decoration: underline;
+ 
+  
+}
+#del{
+  margin-top: 1vh;
+  height: auto;
+  width: auto;
+  color: grey;
+ 
+  float: right;
+  margin-right: 1vh;
+  font-size: 2rem;
+  margin-top: -0.5vh;
+}
+#new1{
+  margin-top: 1vh;
+  visibility: collapse;
+}
+.popup{
+  position: absolute;
+  width: 50vh;
+  height: 70vh;
+  background-color: #fafafa;
+  margin: auto;
+}
+#form1{
+  margin:auto;
+}
+.passr2{
+  margin-left: 5vh;
+  margin-bottom: 10vh;
+}
+.input{
+  margin: auto;
+}
+.sign{
+  margin-top: 5vh;
+  font-size: 2rem;
+  margin-bottom: 7vh;
+}
