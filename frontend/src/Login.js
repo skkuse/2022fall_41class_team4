@@ -3,19 +3,36 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 
 import Button from "react-bootstrap/Button";
+import axios from "axios"
 
 class Login extends React.Component {
+  
   constructor(props) {
     super(props);
-    var text;
-    if (this.props.title == "asdf") {
-      this.state = {
-        name: "problem1 is a problem ~~",
-      };
-    }
+    this.state = {
+      "email": '',
+      "password": '',
+      
+    }  
+   
+    
   }
+ handleChange = (e) => {
+    this.setState({"email": e.target.value});
+  
+}
+ handleChange1 = (e) => {
+  this.setState({"password": e.target.value});
+  
+ 
+}
   handleClick() {
-    console.log('this is:', this);
+    console.log("ID"+this.state.email);
+    console.log("PW"+this.state.password);
+    axios.defaults.withCredentials = true;
+   
+    axios.post('http://146.56.165.145:8000/api/login/',this.state,{withCredentials: false})
+        .then(response => console.log({ response }));
   }
 
   render() {
@@ -27,13 +44,13 @@ class Login extends React.Component {
      
           
               
-            <Form.Control class="input" placeholder="ID" autoFocus type="email" />
+            <Form.Control class="input" placeholder="ID" autoFocus type="text" onChange={(e)=>this.handleChange1(e)} />
           </Form.Group>
            
           <Form.Group size="lg" controlId="password" class="passr" >
             
            
-            <Form.Control class="input" placeholder="Password" type="password" />
+            <Form.Control class="input" placeholder="Password" type="password" onChange={(e)=>this.handleChange(e)} />
           </Form.Group>
         
         </Form>
