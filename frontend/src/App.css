@@ -66,8 +66,30 @@
   justify-content: center;
 }
 #root {
-  height: 100vh;
+  height: 20vh;
   align-items: center;
   display: flex;
   justify-content: center;
+  background-color:  #a0ca4e;
+  position: relative;
+  top: 40%;
 }
+#button{
+  background-color: #3e77e0;
+  color: white;
+  width: 100px;
+  height: 50px;
+  border-radius: 10%;
+  margin-left: 0.52vh;
+}
+body{
+  height: 100vh;
+}
+#email{
+  margin-bottom: 0.5vh;
+}
+#form{
+  display: table;
+}
+.passr{display:table-row;}
+

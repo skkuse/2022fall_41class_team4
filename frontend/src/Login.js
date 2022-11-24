@@ -14,27 +14,33 @@ class Login extends React.Component {
       };
     }
   }
+  handleClick() {
+    console.log('this is:', this);
+  }
 
   render() {
     return (
       <div className="Login">
-        <Form>
-          <Form.Group size="lg" controlId="email">
-            <Form.Label>Email</Form.Label>
-
-            <Form.Control autoFocus type="email" />
+        <Form id='form'>
+         
+          <Form.Group size="lg" controlId="email" class="passr">
+     
+          
+              
+            <Form.Control class="input" placeholder="ID" autoFocus type="email" />
           </Form.Group>
-
-          <Form.Group size="lg" controlId="password">
-            <Form.Label>Password</Form.Label>
-
-            <Form.Control type="password" />
+           
+          <Form.Group size="lg" controlId="password" class="passr" >
+            
+           
+            <Form.Control class="input" placeholder="Password" type="password" />
           </Form.Group>
-
-          <Button block size="lg" type="submit">
+        
+        </Form>
+     
+        <Button id="button" block size="lg" onClick={() => this.handleClick()}>
             Login
           </Button>
-        </Form>
       </div>
     );
   }
