@@ -22,7 +22,8 @@ function App() {
                 </>
               }
             />
-
+            
+            <Route path="/Problemlist" element={<ProblemList />} />
             <Route path="/hhg" element={<Left />} />
             <Route path="/login" element={<Login />} />
             {/* <Route path="/problems/" element={<ProblemDetail />} /> */}
