@@ -5,7 +5,10 @@ class Popup extends React.Component  {
     constructor(props){
       super(props)
       this.state = {
-        "showStore":true
+        "showStore":true,
+        "Email": "",
+        "ID":"",
+        "Password":""
         
       }  
      
@@ -16,7 +19,21 @@ class Popup extends React.Component  {
            });
            this.props.toggle();
     }
-   
+    handleChange2 = (e) => {
+        this.setState({"Email": e.target.value});
+        
+       
+      }
+      handleChange1 = (e) => {
+        this.setState({"ID": e.target.value});
+        
+       
+      }
+      handleChange = (e) => {
+        this.setState({"Password": e.target.value});
+        
+       
+      }
     
     render() {
       return (
@@ -28,7 +45,7 @@ class Popup extends React.Component  {
 
 
 
-        <Form.Control class="input" placeholder="Email" autoFocus type="text" onChange={(e) => this.handleChange1(e)} />
+        <Form.Control class="input" placeholder="Email" autoFocus type="text" onChange={(e) => this.handleChange2(e)} />
             </Form.Group>
        
           <Form.Group size="lg" controlId="email" class="passr2">
