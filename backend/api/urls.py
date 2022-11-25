@@ -8,7 +8,7 @@ urlpatterns = [
    path('problem/<int:problem_id>', ProblemAPI.as_view()),
    path('userProblems/<int:user_id>', UserProblemAPI.as_view()),
    path('users/<int:user_id>', UserListAPI.as_view()),
-   # path('users/<int:problem_id>', UserAPI),
+   path('users', UserRegisterAPI.as_view()),
 
    path('answers', AnswerListAPI.as_view()),
    path('answers/<int:answer_id>', AnswerAPI.as_view()),

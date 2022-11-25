@@ -1,7 +1,14 @@
-FROM python:latest
+FROM python:3.8-slim-buster
 
 WORKDIR /usr/app/src
 
 COPY test.py ./
 
-CMD [ "python", "./test.py"]
+COPY testcases_run.py ./
+
+# COPY requirements.txt ./
+# RUN apt-get update
+# RUN apt-get -y install gcc
+# RUN pip3 install -r requirements.txt
+
+CMD [ "python", "./testcases_run.py"]

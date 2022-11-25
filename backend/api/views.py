@@ -8,6 +8,7 @@ from .serializer import *
 from django.contrib.auth import  login,get_user_model, authenticate
 from django.contrib.auth.models import User
 import docker
+import os
 import backend
 from rest_framework.views import APIView
 from api.models import User as Custom_User
@@ -70,14 +71,14 @@ class TestCaseAPI(APIView):
     # 테스트 케이스 조회
     def get(self, request, problem_id):
         problem = Problem.objects.get(id=problem_id)
-        model = Answer.objects.get(problem=problem)
-        serializer = AnswerSerializer(model)
+        model = testCase.objects.get(problem=problem)
+        serializer = testCaseSerializer(model, many=True)
         return Response(serializer.data)
 
     # 테스트 케이스 수정
     def patch(self, request, testcase_id):
-        model = TestCase.objects.get(id=testcase_id)
-        serializer = AnswerSerializer(model, data=request.data, partial=True)
+        model = testCase.objects.get(id=testcase_id)
+        serializer = testCaseSerializer(model, data=request.data, partial=True)
         if (serializer.is_valid()):
             serializer.save()
             return Response(serializer.data, status=200)
@@ -85,7 +86,7 @@ class TestCaseAPI(APIView):
 
     # 문제 답안 삭제
     def delete(self, request, testcase_id):
-        model = TestCase.objects.get(id=testcase_id)
+        model = testCase.objects.get(id=testcase_id)
         model.delete()
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
@@ -242,20 +243,45 @@ def codeTestAPI(request):
         #get user code from post req body
         reqData = request.data
         userCode = reqData['userCode']
+        user_id = reqData['user_id']
+        problem_id = reqData['problem_id']
 
         #make user code py file
         f = open("./userCodeTest/test.py", 'w')
         f.write(userCode)
         f.close()
 
-        #build docker file
+        #get the problem's testcase
+        problem = Problem.objects.get(id=problem_id)
+        testCases = testCase.objects.filter(problem=problem)
 
+        #generate unittest code
+        testcase_file = open("./userCodeTest/testcases_run.py", 'w')
+        testcase_init_list = ["import unittest\n", "import test\n","class solutionTest(unittest.TestCase):"]
+        testcase_file.writelines(testcase_init_list)
+        
+        for i, testCase in enumerate(testCases):
+            testcase_file.write(f"\tdef test{1}(self):\n")
+            testcase_file.write(f"\t\tself.assertEqual(test.solution({testCase.testCase_in}),{testCase.testCase_out})\n")
+        
+        testcase_close_list = ["if __name__ == '__main__':\n", "\tunittest.main()\n"]
+        testcase_file.writelines(testcase_close_list)
+        testcase_file.close()
+
+        #build docker file
+        test_docker_img = client.images.build(path="./userCodeTest")
+
+        #make docker container
+        client.containers.run(test_docker_img)
+        dockerfile_dir='./userCodeTest'
+        dockerfile_path = os.path.dirname(dockerfile_dir)
+
+        img, json = client.images.build(path=dockerfile_path, dockerfile="dockerfile")
+
+        response = client.containers.run(img)
 
         #save user code to DB
         
-
-        #make docker container
-        client.containers.run('image')
 
         #update userProblem info
         
