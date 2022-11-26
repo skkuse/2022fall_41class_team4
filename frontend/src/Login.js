@@ -44,7 +44,11 @@ class Login extends React.Component {
     axios.defaults.withCredentials = true;
    
     axios.post('http://146.56.165.145:8000/api/login/',{"email":this.state.email,"password":this.state.password})
-        .then(response => console.log({ response }));
+    .then(response => {
+      console.log(response);
+      window.location.replace('/Problemlist');
+    })
+
   }
 
   render() {
@@ -58,13 +62,13 @@ class Login extends React.Component {
 
 
 
-            <Form.Control class="input" placeholder="ID" autoFocus type="text" onChange={(e) => this.handleChange1(e)} />
+            <Form.Control class="input" placeholder="ID" autoFocus type="text" onChange={(e) => this.handleChange(e)} />
           </Form.Group>
 
           <Form.Group size="lg" controlId="password" class="passr">
 
 
-            <Form.Control class="input" placeholder="Password" type="password" onChange={(e) => this.handleChange(e)} />
+            <Form.Control class="input" placeholder="Password" type="password" onChange={(e) => this.handleChange1(e)} />
           </Form.Group>
           <Button id="new" block size="lg" onClick={this.togglePop}>
           New Account
