@@ -210,8 +210,8 @@ class loginAPI(APIView):
     def post(self, request):
         reqData = request.data
         email = reqData['email']  # request.POST.get('email') #['email']
-        # print(f'user email = {email}')
         password = reqData['password']
+        print(f'user email = {email}\nuser password = {password}')
         user = authenticate(request, username=email, password=password)
         serializer = UsersSerializer(user)
         if user:
