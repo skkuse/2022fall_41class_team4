@@ -15,7 +15,7 @@ class Td extends React.Component {
           <td className="px-4 py-3 list">{this.props.item.name}</td>
           <td className="px-4 py-3 list">{this.props.item.hardness}</td>
           <td className="px-4 py-3 list">{this.props.item.solved_ratio}</td>
-          <td className="px-4 py-3 list">{this.props.item.website}</td>
+         
         </tr>
       </>
     );

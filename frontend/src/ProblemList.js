@@ -53,7 +53,7 @@ class ProblemList extends React.Component {
               <th className=" px-4 py-3">문제명</th>
               <th className=" px-4 py-3">난이도</th>
               <th className=" px-4 py-3">정답률</th>
-              <th className=" px-4 py-3">내 점수</th>
+              
             </tr>
           </thead>
           <Tr ProblemData={this.state.ProblemData} />
