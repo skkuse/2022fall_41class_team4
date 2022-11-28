@@ -12,6 +12,7 @@ import os
 import backend
 from rest_framework.views import APIView
 from api.models import User as Custom_User
+import json
 
 
 # todo: 에러코드 구체화
@@ -60,7 +61,7 @@ class AnswerAPI(APIView):
 class TestCaseListAPI(APIView):
     # 테스트 케이스 등록
     def post(self, request):
-        serializer = TestCaseSerializer(data=request.data)
+        serializer = testCaseSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             print(serializer.data)
@@ -210,8 +211,8 @@ class loginAPI(APIView):
     def post(self, request):
         reqData = request.data
         email = reqData['email']  # request.POST.get('email') #['email']
-        # print(f'user email = {email}')
         password = reqData['password']
+        print(f'user email = {email}\nuser password = {password}')
         user = authenticate(request, username=email, password=password)
         serializer = UsersSerializer(user)
         if user:
@@ -234,54 +235,59 @@ class loginAPI(APIView):
 #             return Response(serializer.data, status=status.HTTP_200_OK)
 #         return Response(f"login failed", status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['POST'])
-def codeTestAPI(request):
-    if request.method == "POST":
-        #init docker client:
-        client = docker.from_env()
+#@api_view(['POST'])
+class codeTestAPI(APIView):
+    def post(self, request):
+        if request.method == "POST":
+            #init docker client:
+            client = docker.from_env()
 
-        #get user code from post req body
-        reqData = request.data
-        userCode = reqData['userCode']
-        user_id = reqData['user_id']
-        problem_id = reqData['problem_id']
+            #get user code from post req body
+            reqData = request.data
+            userCode = reqData['user_code']
+            user_id = reqData['user_id']
+            problem_id = reqData['problem_id']
 
-        #make user code py file
-        f = open("./userCodeTest/test.py", 'w')
-        f.write(userCode)
-        f.close()
+            #make user code py file
+            print("\n\nWorking on " +os.getcwd()+"\n\n")
+            f = open("./api/userCodeTest/test.py", 'w')
+            f.write(userCode)
+            f.close()
 
-        #get the problem's testcase
-        problem = Problem.objects.get(id=problem_id)
-        testCases = testCase.objects.filter(problem=problem)
+            #get the problem's testcase
+            problem = Problem.objects.get(id=problem_id)
+            testCases = testCase.objects.filter(problem=problem)
 
-        #generate unittest code
-        testcase_file = open("./userCodeTest/testcases_run.py", 'w')
-        testcase_init_list = ["import unittest\n", "import test\n","class solutionTest(unittest.TestCase):"]
-        testcase_file.writelines(testcase_init_list)
-        
-        for i, testCase in enumerate(testCases):
-            testcase_file.write(f"\tdef test{1}(self):\n")
-            testcase_file.write(f"\t\tself.assertEqual(test.solution({testCase.testCase_in}),{testCase.testCase_out})\n")
-        
-        testcase_close_list = ["if __name__ == '__main__':\n", "\tunittest.main()\n"]
-        testcase_file.writelines(testcase_close_list)
-        testcase_file.close()
+            #generate unittest code
+            testcase_file = open("./api/userCodeTest/testcases_run.py", 'w')
+            testcase_init_list = ["import unittest\n", "import test\n","class solutionTest(unittest.TestCase):\n"]
+            testcase_file.writelines(testcase_init_list)
+            
+            for i, test_case in enumerate(testCases):
+                testcase_file.write(f"\tdef test{i}(self):\n")
+                testcase_file.write(f"\t\tself.assertEqual(test.solution({test_case.testCase_in[1:-1]}),{test_case.testCase_out[1:-1]})\n")
+            
+            testcase_close_list = ["if __name__ == '__main__':\n", "\tunittest.main()\n"]
+            testcase_file.writelines(testcase_close_list)
+            testcase_file.close()
 
-        #build docker file
-        test_docker_img = client.images.build(path="./userCodeTest")
+            #build docker file
+            dockerfile_path='./api/userCodeTest/Dockerfile'
+            dockerfile_dir = os.path.dirname(dockerfile_path)
 
-        #make docker container
-        client.containers.run(test_docker_img)
-        dockerfile_dir='./userCodeTest'
-        dockerfile_path = os.path.dirname(dockerfile_dir)
+            test_docker_img, json_file = client.images.build(path=dockerfile_dir, dockerfile="Dockerfile")
 
-        img, json = client.images.build(path=dockerfile_path, dockerfile="dockerfile")
+            #make docker container
+            response = client.containers.run(test_docker_img,stdout=True,stderr=True)
+            response_dict = {}
+            response_dict["result"] = str(response)
+            #response = str(response)
+            print(response)
 
-        response = client.containers.run(img)
+            #save user code to DB
+            
 
-        #save user code to DB
-        
-
-        #update userProblem info
-        
+            #update userProblem info
+            
+            return Response(response_dict, status=status.HTTP_200_OK)
+            

@@ -6,6 +6,8 @@ COPY test.py ./
 
 COPY testcases_run.py ./
 
+COPY . .
+
 # COPY requirements.txt ./
 # RUN apt-get update
 # RUN apt-get -y install gcc
