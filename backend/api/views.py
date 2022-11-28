@@ -176,7 +176,7 @@ class UserProblemAPI(APIView):
 
 class UserListAPI(APIView):
     # 사용자 조회
-    def post(self, request, user_id):
+    def get(self, request, user_id):
         user = Custom_User.objects.get(id=user_id)
         serializer = UsersSerializer(user)
         if serializer.is_valid():
