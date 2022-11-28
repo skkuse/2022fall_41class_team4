@@ -21,7 +21,7 @@ urlpatterns = [
    path('preset/<int:user_id>/<int:problem_id>', PresetAPI.as_view()),
 
    path('login/', loginAPI.as_view()),
-   path('testcase/test/', codeTestAPI)
+   path('testcase/test/', codeTestAPI.as_view())
    # path('testcase/test', ExecuteTestCaseAPI.as_view()),
 
 ]
