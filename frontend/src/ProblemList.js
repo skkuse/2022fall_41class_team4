@@ -49,11 +49,11 @@ class ProblemList extends React.Component {
         <table className="min-w-full table-auto text-gray-800">
           <thead className="justify-between">
             <tr class="banner">
-              <th className="text-gray-300 px-4 py-3">번호</th>
-              <th className="text-gray-300 px-4 py-3">문제명</th>
-              <th className="text-gray-300 px-4 py-3">난이도</th>
-              <th className="text-gray-300 px-4 py-3">정답률</th>
-              <th className="text-gray-300 px-4 py-3">내 점수</th>
+              <th className="px-4 py-3">번호</th>
+              <th className=" px-4 py-3">문제명</th>
+              <th className=" px-4 py-3">난이도</th>
+              <th className=" px-4 py-3">정답률</th>
+              <th className=" px-4 py-3">내 점수</th>
             </tr>
           </thead>
           <Tr ProblemData={this.state.ProblemData} />

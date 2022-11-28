@@ -147,4 +147,12 @@ body {
 }
 .banner {
   background-color: #a0ca4e;
+  color: white;
+  text-align: center;
+}
+.list td {
+  text-align: center;
+}
+.list {
+  text-align: center;
 }
