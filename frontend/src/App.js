@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Explanation from "./Explanation";
 import Related from "./Related";
 import Login from "./Login";
+import Result from "./Result";
 
 function App() {
   return (
@@ -19,10 +20,11 @@ function App() {
                 <>
                   <ProblemList />
                   <Explanation title="asdf" />
+                  <Result />
                 </>
               }
             />
-            
+
             <Route path="/Problemlist" element={<ProblemList />} />
             <Route path="/hhg" element={<Left />} />
             <Route path="/login" element={<Login />} />
