@@ -72,7 +72,7 @@ class TestCaseAPI(APIView):
     # 테스트 케이스 조회
     def get(self, request, problem_id):
         problem = Problem.objects.get(id=problem_id)
-        model = testCase.objects.get(problem=problem)
+        model = testCase.objects.filter(problem=problem)
         serializer = testCaseSerializer(model, many=True)
         return Response(serializer.data)
 
