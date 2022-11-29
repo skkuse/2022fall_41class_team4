@@ -29,7 +29,7 @@ class AnswerSerializer(serializers.ModelSerializer):
 
 class testCaseSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Answer
+        model = testCase
         fields = ('id', 'testCase_in', 'testCase_out', 'problem')
 
 class UsersSerializer(serializers.ModelSerializer):
