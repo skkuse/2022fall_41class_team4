@@ -15,7 +15,7 @@ urlpatterns = [
 
 
    path('testcase', TestCaseListAPI.as_view()),
-   path('testcase/<int:model_id>', TestCaseAPI.as_view()),
+   path('testcase/<int:problem_id>', TestCaseAPI.as_view()),
 
    path('preset', PresetListAPI.as_view()),
    path('preset/<int:user_id>/<int:problem_id>', PresetAPI.as_view()),
