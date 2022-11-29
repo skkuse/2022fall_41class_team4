@@ -278,7 +278,7 @@ class codeTestAPI(APIView):
             test_docker_img, json_file = client.images.build(path=dockerfile_dir, dockerfile="Dockerfile")
 
             #make docker container
-            response = client.containers.run(test_docker_img,stdout=True,stderr=True)
+            response = client.containers.run(test_docker_img,stdout=True,stderr=True, remove=True)
             response_dict = {}
             response_dict["result"] = str(response)
             #response = str(response)
