@@ -16,7 +16,7 @@ class ProblemSerializer(serializers.ModelSerializer):
     # testCases = testCaseSerializer(many=True)
     class Meta:
         model = Problem
-        fields = ('id', 'name', 'hardness', 'solved_ratio', 'description')
+        fields = ('id', 'name', 'hardness', 'solved_ratio', 'description', 'restrictions')
 
 
 

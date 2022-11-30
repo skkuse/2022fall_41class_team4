@@ -11,6 +11,7 @@ class Problem(models.Model):
     hardness = models.IntegerField()
     solved_ratio = models.FloatField()
     description = models.TextField()
+    restrictions = models.TextField(null=True)
 
 
 class Answer(models.Model):
