@@ -3,14 +3,18 @@ import Chart from "react-apexcharts";
 class SecondResult extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      data: this.props.dataParentToChild
+  }
   }
 
   render() {
     return (
       <>
         <div className="FirstTab">
-          <p>2d Tab!! Hurray!!</p>
-          {/* First tab content will go here */}
+          <div classname="result">
+          효율점수:{this.state.data}
+          </div>
         </div>
       </>
     );

@@ -150,3 +150,7 @@ body {
 .list {
   text-align: center;
 }
+.result{
+  text-align: center;
+  font-size: 2rem;
+}

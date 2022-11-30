@@ -3,14 +3,18 @@ import Chart from "react-apexcharts";
 class ThirdResult extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+        data: this.props.dataParentToChild
+    }
   }
 
   render() {
     return (
       <>
         <div className="FirstTab">
-          <p>3rd</p>
-          {/* First tab content will go here */}
+          <div classname="result">
+            가독성 점수: {this.state.data}
+            </div>
         </div>
       </>
     );
