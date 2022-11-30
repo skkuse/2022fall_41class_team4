@@ -3,6 +3,8 @@ import Chart from "react-apexcharts";
 import { useState } from "react";
 import SecondResult from "./SecondResult";
 import FirstResult from "./FirstResult";
+import ThirdResult from "./ThirdResult";
+import "./Result.css"
 class Result extends React.Component {
   constructor(props) {
     super(props);
@@ -50,6 +52,11 @@ class Result extends React.Component {
       activeTab: 2,
     });
   };
+  handleTab3 = () => {
+    this.setState({
+      activeTab: 3,
+    });
+  };
 
   render() {
     return (
@@ -78,6 +85,12 @@ class Result extends React.Component {
             >
               Tab 2
             </li>
+            <li
+              className={this.state.activeTab === 3 ? "active" : ""}
+              onClick={() => this.handleTab3()}
+            >
+              Tab 3
+            </li>
           </ul>
           <div className="outlet">
             {
@@ -85,7 +98,17 @@ class Result extends React.Component {
                 {this.state.activeTab === 1 ? (
                   <FirstResult />
                 ) : (
+                  <></>
+                )}
+                 {this.state.activeTab === 2 ? (
                   <SecondResult />
+                ) : (
+                  <></>
+                )}
+                   {this.state.activeTab === 3 ? (
+                  <ThirdResult />
+                ) : (
+                  <></>
                 )}
               </>
             }

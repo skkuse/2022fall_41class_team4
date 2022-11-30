@@ -1,0 +1,55 @@
+.Tabs {
+    width: 40vw;
+    height: auto;
+    min-height: 400px;
+    background: #A8c860;
+    margin: auto;
+    padding: 0;
+    color: #E8F0F2;
+    border-radius: 0rem;
+    @media (max-width: 769px) {
+      padding: 2rem 0;
+    }
+   
+  }
+   
+  /* Tab Navigation */
+  ul.nav {
+    width: 100%;
+    margin: 0 ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    border-radius: 0rem;
+    padding-left: 0px;
+    @media (max-width: 768px) {
+      width: 90%;
+    }
+  }
+   
+  ul.nav li {
+    width: 50%;
+    padding: 1rem;
+    border: 1px solid;
+    border-color: grey;
+    list-style: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.7s;
+  }
+   
+   
+  ul.nav li:hover {
+    background: rgba(50, 224, 196, 0.15);
+  }
+   
+  ul.nav li.active {
+    background: #39A2DB;
+  }
+   
+  /* Tab Content Styles */
+  .TabContent {
+    font-size: 2rem;
+    text-align: center;
+  }
