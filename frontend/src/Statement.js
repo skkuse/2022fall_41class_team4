@@ -1,31 +1,64 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 
 class Statement extends Component {
+    state = {
+        StatementData: [{id:0,name:'~',hardness:0,solved_ratio:0.01,description:'~',restrictions:null}],
+        flag: false,
+    };
+    shouldComponentUpdate() {
+        if (this.state.flag) {
+          return false;
+        }
+        return true;
+    }
+    
+    getStatementData = () => {
+        const base = "http://146.56.165.145:8000/api/problem/1";
+
+        axios
+            .get(base)
+            .then((res) => {
+            //console.log(res.data);
+
+            this.setState({
+                StatementData: res.data,
+                flag: true,
+            });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        //console.log("done");
+    };
+    
     render() {
+        {
+            this.getStatementData();
+        }
         return (
             <div>
                 <div className="left-header">
-                    문제 설명
+                {/* {console.log("start")}
+                {console.log(this.state.StatementData.description)}
+                {console.log("end")} */}
+                문제 설명
                 </div>
                 <div className="left-content">
                     <b>문제</b>
                     <div>
-                        피보나치 수는 0과 1로 시작하며, 다음피보나치 수는 바로 앞의 두 피보나치 수의 합이 된다. n = 0, 1, ... 에 해당하는 피보나치 수는 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, ... 이다.
-                    </div>
-                    <br/>
-                    <div>
-                        n번째 피보나치 수를 리턴하시오.
+                        {this.state.StatementData.description}
                     </div>
                     <br/>
                     <b>제약사항</b>
                     <div>
-                        0 &lt;= n &lt;= 80<br/>
-                        리턴 타입이 int 가 아니라는 것에 유의!
+                        {this.state.StatementData.restrictions}
                     </div>
                 </div>
             </div>
         );
     }
+    return;
 }
 
 export default Statement;
