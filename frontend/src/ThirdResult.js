@@ -12,7 +12,7 @@ class ThirdResult extends React.Component {
     return (
       <>
         <div className="FirstTab">
-          <div classname="result">
+          <div className="result">
             가독성 점수: {this.state.data}
             </div>
         </div>

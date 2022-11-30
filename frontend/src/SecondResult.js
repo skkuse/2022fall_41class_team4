@@ -12,7 +12,7 @@ class SecondResult extends React.Component {
     return (
       <>
         <div className="FirstTab">
-          <div classname="result">
+          <div className="result">
           효율점수:{this.state.data}
           </div>
         </div>

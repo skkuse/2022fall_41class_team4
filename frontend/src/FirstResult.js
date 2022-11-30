@@ -15,7 +15,7 @@ class FirstResult extends React.Component {
     return (
       <>
         <div className="FirstTab">
-        <div classname="result">
+        <div className="result">
           <p>기능점수:  {this.state.data}</p>
         </div>
         </div>
