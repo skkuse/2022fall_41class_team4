@@ -4,6 +4,7 @@ import Tr from "./Tr";
 import Button from "react-bootstrap/Button";
 import Header from "./Header";
 import Form from "react-bootstrap/Form";
+import "./problemlist.css";
 class ProblemList extends React.Component {
   state = {
     ProblemData: [],
@@ -67,8 +68,10 @@ class ProblemList extends React.Component {
       <div className="container max-w-screen-lg mx-auto">
         <Header name={this.state.user} />
 
-        <div className="text-xl font-bold mt-5 mb-3 text-center">문제 목록</div>
-        <table className="min-w-full table-auto text-gray-800">
+        <div className="text-xl font-bold mt-5 mb-3 text-center problemtable">
+          문제 목록
+        </div>
+        <table className=" table-auto text-gray-800 problemtable">
           <thead className="justify-between">
             <tr class="banner">
               <th className="px-4 py-3">번호</th>
@@ -83,18 +86,18 @@ class ProblemList extends React.Component {
             id={this.state.id}
           />
         </table>
-        <Form.Group size="lg" controlId="email" class="passr">
-          <Form.Control
-            class="input"
-            placeholder="search"
-            autoFocus
-            type="text"
-            onChange={(e) => this.handleChange(e)}
-          />
-        </Form.Group>
-        <Button id="button" block size="lg" onClick={() => this.search()}>
-          search
-        </Button>
+        <div className="Search">
+          <Form.Group size="lg" controlId="email" class="passr">
+            <Form.Control
+              class="input"
+              placeholder="search"
+              autoFocus
+              type="text"
+              onChange={(e) => this.handleChange(e)}
+            />
+            <img src={require("./vid.png")} />
+          </Form.Group>
+        </div>
       </div>
     );
   }
