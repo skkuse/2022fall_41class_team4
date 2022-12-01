@@ -39,8 +39,8 @@ class Login extends React.Component {
         password: this.state.password,
       })
       .then((response) => {
-        console.log(response);
-        window.location.replace("/Problemlist");
+        var newurl = "/Problemlist";
+        window.location.replace(newurl);
       });
   }
 

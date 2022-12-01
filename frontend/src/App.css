@@ -6,7 +6,11 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+.title {
+  text-align: center;
+  margin: 0;
+  padding-left: 6.5vw;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -150,7 +154,7 @@ body {
 .list {
   text-align: center;
 }
-.result{
+.result {
   text-align: center;
   font-size: 2rem;
 }

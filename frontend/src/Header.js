@@ -10,14 +10,26 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: this.props.dataParentToChild,
+    };
+  }
   render() {
     return (
       <AppBar class="header" position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            className="title"
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1 }}
+          >
             SKKU USE
           </Typography>
-          <Button color="inherit">Profile</Button>
+          <Button color="inherit">{this.state.data}</Button>
         </Toolbar>
       </AppBar>
     );

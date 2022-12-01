@@ -13,9 +13,12 @@ class ProblemList extends React.Component {
     }
     return true;
   }
-
+  id = () => {
+    var search = this.props.location.search;
+    var name = new URLSearchParams(search).get("id");
+    this.state.id = name;
+  };
   getProblemData = () => {
-    console.log(1);
     // 임시 데이터 호출
     const base = "http://146.56.165.145:8000/api/problemlist";
 
@@ -44,6 +47,7 @@ class ProblemList extends React.Component {
     return (
       <div className="container max-w-screen-lg mx-auto">
         <Header />
+
         <div className="text-xl font-bold mt-5 mb-3 text-center">문제 목록</div>
 
         <table className="min-w-full table-auto text-gray-800">
@@ -53,7 +57,6 @@ class ProblemList extends React.Component {
               <th className=" px-4 py-3">문제명</th>
               <th className=" px-4 py-3">난이도</th>
               <th className=" px-4 py-3">정답률</th>
-              
             </tr>
           </thead>
           <Tr ProblemData={this.state.ProblemData} />
