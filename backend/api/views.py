@@ -129,11 +129,20 @@ class PresetAPI(APIView):
         return Response(serializer.data)
 
     # 사용자 최종 수정 코드 등록
-    def post(self, request, user_id, problem_id, preset_number):
-        serializer = PresetSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            # print(serializer.data)
+    def post(self, request):
+        reqData = request.data
+        user_id = reqData['user_id']
+        problem_id = reqData['problem_id']
+        code = reqData['user_code']
+        preset_number = reqData['preset_number']
+        user = get_user_model().objects.get(id=user_id)
+        problem = Problem.objects.get(id=problem_id)
+        preset, bool = Preset.objects.get_or_create(user=user, problem=problem, preset_number=preset_number)
+        preset.code = code
+        preset.save()
+        serializer = PresetSerializer(preset)
+        if serializer:
+            print(serializer.data)
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
