@@ -85,10 +85,11 @@ class UserProblems(models.Model):
     problem = models.ForeignKey('Problem', related_name='userProblem', on_delete=models.CASCADE)
 
 class Preset(models.Model):
+    st = "def solution(n):\n\tanswer = 0\n\treturn answer"
     id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey('User', related_name="Preset", on_delete=models.CASCADE)
     problem = models.ForeignKey('Problem', related_name='Preset', on_delete=models.CASCADE)
-    code = models.TextField(default="")
+    code = models.TextField(default=st)
     preset_number= models.IntegerField()
     # preset1 = models.TextField()
     # preset2 = models.TextField()
