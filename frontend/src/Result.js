@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
-import { useState } from "react";
 import SecondResult from "./SecondResult";
 import FirstResult from "./FirstResult";
+import ThirdResult from "./ThirdResult";
+import "./Result.css"
 class Result extends React.Component {
   constructor(props) {
     super(props);
@@ -36,6 +37,9 @@ class Result extends React.Component {
         ],
       },
       activeTab: -1,
+      score1: 21,
+      score2: 24,
+      score3: 33,
     };
   }
   handleTab1 = () => {
@@ -48,6 +52,11 @@ class Result extends React.Component {
   handleTab2 = () => {
     this.setState({
       activeTab: 2,
+    });
+  };
+  handleTab3 = () => {
+    this.setState({
+      activeTab: 3,
     });
   };
 
@@ -70,22 +79,38 @@ class Result extends React.Component {
               className={this.state.activeTab === 1 ? "active" : ""}
               onClick={() => this.handleTab1()}
             >
-              Tab 1
+            기능 점수 
             </li>
             <li
               className={this.state.activeTab === 2 ? "active" : ""}
               onClick={() => this.handleTab2()}
             >
-              Tab 2
+              효율 점수
+            </li>
+            <li
+              className={this.state.activeTab === 3 ? "active" : ""}
+              onClick={() => this.handleTab3()}
+            >
+            가독성 점수
             </li>
           </ul>
           <div className="outlet">
             {
               <>
                 {this.state.activeTab === 1 ? (
-                  <FirstResult />
+                  <FirstResult dataParentToChild = {this.state.score1} />
                 ) : (
-                  <SecondResult />
+                  <></>
+                )}
+                 {this.state.activeTab === 2 ? (
+                  <SecondResult dataParentToChild = {this.state.score2} />
+                ) : (
+                  <></>
+                )}
+                   {this.state.activeTab === 3 ? (
+                  <ThirdResult dataParentToChild = {this.state.score3} />
+                ) : (
+                  <></>
                 )}
               </>
             }
