@@ -256,7 +256,9 @@ class codeTestAPI(APIView):
 
             #get the problem's testcase
             problem = Problem.objects.get(id=problem_id)
+            user = get_user_model().objects.get(id=user_id)
             testCases = testCase.objects.filter(problem=problem)
+            userProblem, created = UserProblems.objects.get_or_create(user=user, problem=problem)
 
             #generate unittest code
             testcase_file = open("./api/userCodeTest/testcases_run.py", 'w')
@@ -265,7 +267,11 @@ class codeTestAPI(APIView):
             
             for i, test_case in enumerate(testCases):
                 testcase_file.write(f"\tdef test{i}(self):\n")
-                testcase_file.write(f"\t\tself.assertEqual(test.solution({test_case.testCase_in[1:-1]}),{test_case.testCase_out[1:-1]})\n")
+                testcase_file.write(f"\t\ttry:\n")
+                testcase_file.write(f"\t\t\tself.assertEqual(test.solution({test_case.testCase_in[1:-1]}),{test_case.testCase_out[1:-1]})\n")
+                testcase_file.write(f"\t\texcept AssertionError as e:\n")
+                testcase_file.write(f"\t\t\tprint(f'fail:{i}') \n")
+                
             
             testcase_close_list = ["if __name__ == '__main__':\n", "\tunittest.main()\n"]
             testcase_file.writelines(testcase_close_list)
@@ -278,7 +284,30 @@ class codeTestAPI(APIView):
             test_docker_img, json_file = client.images.build(path=dockerfile_dir, dockerfile="Dockerfile")
 
             #make docker container
-            response = client.containers.run(test_docker_img,stdout=True,stderr=True, remove=True)
+            response=""
+            fail_count=0
+            fail_list=[]
+            try:
+                response = client.containers.run(test_docker_img,stdout=True,stderr=True, remove=True)
+                response = response.decode('utf-8')
+                responses = response.split('\n')
+                for res in responses:
+                    if "fail" in res:
+                        fail_count += 1
+                        fail_list.append(res.split(":")[1])
+                
+                userProblem.user_code = userCode
+                userProblem.user_score = (len(testCases)-fail_count) / len(testCases)
+                serializer =UserProblemsSerializer(userProblem)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+                        
+                print(responses)
+            except docker.errors.ContainerError as error:
+                #responses = error.split("\n")
+                #print(responses)
+                # print(response)
+                print("error")
+            
             response_dict = {}
             response_dict["result"] = str(response)
             #response = str(response)
@@ -286,8 +315,9 @@ class codeTestAPI(APIView):
 
             #save user code to DB
             
+            
 
             #update userProblem info
             
-            return Response(response_dict, status=status.HTTP_200_OK)
+            
             
