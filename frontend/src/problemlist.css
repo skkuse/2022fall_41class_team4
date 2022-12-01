@@ -5,3 +5,11 @@
   width: 70vw;
   float: right;
 }
+img {
+  width: 2vh;
+  height: 2vh;
+  margin: 2vh;
+}
+.passr {
+  display: flex;
+}

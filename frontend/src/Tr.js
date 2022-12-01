@@ -20,7 +20,6 @@ class Tr extends React.Component {
           console.log(id);
           if (elem.name.includes(searched)) return <Td item={elem} id={id} />;
         })}
-        {this.props.search}
       </tbody>
     );
   }
