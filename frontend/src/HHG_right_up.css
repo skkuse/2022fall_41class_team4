@@ -1,0 +1,112 @@
+.up_content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.up_buttonlist {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    align-items: center;
+    /* justify-content: space-between; */
+    padding-left: 11px;
+    padding-right: 11px;
+}
+
+.language_button {
+    background-color: #F5F5F5;
+    box-shadow: 0px 2px 6px -2px black inset;
+    border-radius: 0.3rem;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: fit-content;
+}
+
+.file_button_default {
+    background-color: #E6E6E6;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 0.3rem;
+    color: white;
+    width: fit-content;
+}
+
+.file_button_current {
+    background-color: #0E151B;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 0.3rem;
+    color: white;
+    width: fit-content;
+}
+
+.file_button_saved {
+    background-color: #A8C860;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 0.3rem;
+    color: white;
+    width: fit-content;
+}
+
+.blue_button {
+    background-color: #3E77E0;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 0.3rem;
+    color: white;
+    width: fit-content;
+}
+
+.red_button {
+    background-color: #CD4C5F;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 0.3rem;
+    color: white;
+    width: fit-content;
+}
+
+.up_button_group1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100px;
+}
+
+.up_button_group2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 245px;
+}
+
+.up_button_group3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 150px;
+}
+
+.up_button_space1 {
+    width: 330px;
+}
+
+.up_button_space2 {
+    width: 175px;
+}
+
+.up_button_space3 {
+    width: 25px;
+}
+
+.up_content_active {
+    flex-grow: 1;
+    background-color: #fafafa;
+    padding: 11px;
+}
+
+.up_content_inactive {
+    display: none;
+}
