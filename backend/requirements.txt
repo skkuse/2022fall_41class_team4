@@ -89,3 +89,4 @@ wadllib==1.3.3
 Werkzeug==2.1.2
 zipp==3.8.0
 zope.interface==4.7.1
+multimetric===1.3.0

@@ -13,6 +13,9 @@ import backend
 from rest_framework.views import APIView
 from api.models import User as Custom_User
 import json
+from copydetect import CopyDetector
+import copydetect
+import subprocess
 
 
 # todo: 에러코드 구체화
@@ -250,15 +253,25 @@ class codeTestAPI(APIView):
 
             #make user code py file
             print("\n\nWorking on " +os.getcwd()+"\n\n")
-            f = open("./api/userCodeTest/test.py", 'w')
-            f.write(userCode)
-            f.close()
+            tf = open("./api/userCodeTest/test.py", 'w')
+            tf.write(userCode)
+            tf.close()
+
 
             #get the problem's testcase
             problem = Problem.objects.get(id=problem_id)
             user = get_user_model().objects.get(id=user_id)
             testCases = testCase.objects.filter(problem=problem)
             userProblem, created = UserProblems.objects.get_or_create(user=user, problem=problem)
+            
+            
+            #get problem's answer
+            answer = Answer.objects.get(problem=problem)
+            af = open("./api/userCodeTest/answer.py", 'w')
+            af.write(answer.answer_code)
+            af.close()
+            
+            
 
             #generate unittest code
             testcase_file = open("./api/userCodeTest/testcases_run.py", 'w')
@@ -289,14 +302,13 @@ class codeTestAPI(APIView):
 
             test_docker_img, json_file = client.images.build(path=dockerfile_dir, dockerfile="Dockerfile")
 
-            #make docker container
+            
             response=""
             fail_count=0
             fail_list=[]
             response_dict = {}
             response_dict["fails"] = []
             response_dict["success"] = []
-            
             
             #test result
             try:
@@ -332,10 +344,15 @@ class codeTestAPI(APIView):
                         response_dict["success"].append(temp)
                         
                         
-                
+                exit_code, console_result = subprocess.getstatusoutput(f"multimetric {os.getcwd()}/api/userCodeTest/test.py")
+                #print(console_result)
+                json_result = json.loads(console_result)
+                overall_metric_score = json_result['overall']['pylint']
                 userProblem.user_code = userCode
                 userProblem.user_score = (len(testCases)-fail_count) / len(testCases)
                 serializer =UserProblemsSerializer(userProblem)
+                response_dict["similarity_with_answer_code"] = 0.0
+                response_dict["efficiency_score"] = overall_metric_score
                 response_dict["userProblemData"] = serializer.data
                 return Response(response_dict, status=status.HTTP_200_OK)
                         
