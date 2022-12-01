@@ -44,5 +44,5 @@ class UserProblemsSerializer(serializers.ModelSerializer):
 
 class PresetSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = Preset
         fields = ('id', 'user_id', 'problem_id', 'code', 'preset_number')
