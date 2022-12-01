@@ -95,7 +95,7 @@ class ProblemList extends React.Component {
               type="text"
               onChange={(e) => this.handleChange(e)}
             />
-            <img src={require("./vid.png")} />
+            <img src={require("./glass.png")} />
           </Form.Group>
         </div>
       </div>
