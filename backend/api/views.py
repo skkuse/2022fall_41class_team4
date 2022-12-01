@@ -124,7 +124,7 @@ class PresetListAPI(APIView):
 class PresetAPI(APIView):
     # 특정 문제에 대한 사용자 코드 프리셋 조회
     def get(self, request, user_id, problem_id, preset_number):
-        preset = Preset.objects.get_or_create(user_id=user_id, problem_id=problem_id,preset_number=preset_number)
+        preset, bool = Preset.objects.get_or_create(user_id=user_id, problem_id=problem_id,preset_number=preset_number)
         serializer = PresetSerializer(preset)
         return Response(serializer.data)
 
