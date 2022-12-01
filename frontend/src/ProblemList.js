@@ -65,12 +65,31 @@ class ProblemList extends React.Component {
     }
 
     return (
-      <div className="container max-w-screen-lg mx-auto">
+      //<div className="container max-w-screen-lg mx-auto">
+      <div className="problemlist_container">
         <Header name={this.state.user} />
 
-        <div className="text-xl font-bold mt-5 mb-3 text-center problemtable">
+      <div className="problemlist_container_inner">
+
+      <div className="problemlist_left_container">
+        {/* <div className="text-xl font-bold mt-5 mb-3 text-center problemtable"> */}
+        <div className="problemlist_title">
           문제 목록
         </div>
+        <div className="Search">
+          <Form.Group size="lg" controlId="email" class="passr">
+            <Form.Control
+              class="input"
+              placeholder="search"
+              autoFocus
+              type="text"
+              onChange={(e) => this.handleChange(e)}
+            />
+            <img src={require("./glass.png")} />
+          </Form.Group>
+        </div>    
+      </div>
+      <div className="problemlist_right_container">
         <table className=" table-auto text-gray-800 problemtable">
           <thead className="justify-between">
             <tr class="banner">
@@ -86,7 +105,8 @@ class ProblemList extends React.Component {
             id={this.state.id}
           />
         </table>
-        <div className="Search">
+      </div>
+        {/* <div className="Search">
           <Form.Group size="lg" controlId="email" class="passr">
             <Form.Control
               class="input"
@@ -97,7 +117,10 @@ class ProblemList extends React.Component {
             />
             <img src={require("./glass.png")} />
           </Form.Group>
-        </div>
+        </div> */}
+      
+      </div>
+      
       </div>
     );
   }

@@ -13,3 +13,31 @@ img {
 .passr {
   display: flex;
 }
+
+
+.problemlist_container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #E6E6E6;
+}
+
+.problemlist_container_inner {
+  height: 100%;
+  margin: 50px;
+  background-color: white;
+  border-radius: 0.8rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.problemlist_title {
+  margin-bottom: 10px;
+}
+
+.problemlist_left_container {
+  padding: 45px;
+}
+
+.problemlist_right_container {
+  margin-top: 120px;
+}

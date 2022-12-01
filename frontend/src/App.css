@@ -140,16 +140,17 @@ body {
   font-size: 2rem;
   margin-bottom: 7vh;
 }
+
 .header {
   margin: 0px;
-  background-color: #a0ca4e;
+  background-color: #0E151B ;
   color: white;
 }
 #root {
   margin: 0px;
 }
 .banner {
-  background-color: #a0ca4e;
+  background-color: #0E151B;
   color: white;
   text-align: center;
 }
