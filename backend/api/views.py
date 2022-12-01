@@ -361,8 +361,13 @@ class codeTestAPI(APIView):
                         temp["user_output"] = usr_output
                         response_dict["success"].append(temp)
                         
-                        
+                #efficiency test
                 exit_code, console_result = subprocess.getstatusoutput(f"multimetric {os.getcwd()}/api/userCodeTest/test.py")
+                
+                #readability test
+                exit_code, pylama_result = subprocess.getstatusoutput(f"pylama {os.getcwd()}/api/userCodeTest/test.py")
+                pylama_error_list = pylama_result.split("\n")
+                
                 #print(console_result)
                 json_result = json.loads(console_result)
                 overall_metric_score = json_result['overall']['pylint']
@@ -371,6 +376,7 @@ class codeTestAPI(APIView):
                 serializer =UserProblemsSerializer(userProblem)
                 response_dict["similarity_with_answer_code"] = 0.0
                 response_dict["efficiency_score"] = overall_metric_score
+                response_dict["readability_score"] = "-"+str(len(pylama_error_list))
                 response_dict["userProblemData"] = serializer.data
                 return Response(response_dict, status=status.HTTP_200_OK)
                         
