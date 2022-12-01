@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './HHG_problemlist.css';
+import skku_icon from "./img/real_skku.png"
 
 class HHG_problemlist extends Component {
     render() {
@@ -7,13 +8,17 @@ class HHG_problemlist extends Component {
             <div className = "problemlist_container">
                 <div className="common_header_logout">
                     <div className="home_button">
-                        코테 연습
+                        <img className="skku" alt="skku" src={skku_icon}/>
+                        <div>코테 연습</div>
                     </div>
-                    <div className="signin">
-                        Sign In
-                    </div>
-                    <div className="signup">
-                        Sign Up
+                    <div className="common_header_space3"/>
+                    <div className="common_header_group3">
+                        <div className="signin">
+                            Sign In
+                        </div>
+                        <div className="signup">
+                            Sign Up
+                        </div>
                     </div>
                 </div>
                 <div className="problemlist_content">

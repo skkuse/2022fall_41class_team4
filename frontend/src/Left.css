@@ -19,15 +19,35 @@
 
 @font-face {font-family: 'Noto Sans KR';font-style: normal;font-weight: 900;src: url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff2) format('woff2'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.woff) format('woff'),url(//fonts.gstatic.com/ea/notosanskr/v2/NotoSansKR-Black.otf) format('opentype'); unicode-range: U+AC00-U+D7A3;}
 
+.left_container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.statement_container {
+    flex-grow: 1;
+}
 
 .left-header {
     background-color: #F7F8FA;
-    padding-left: 10px;
+    padding-left: 15px;
+    padding-top: 3px;
+    padding-bottom: 3px;
     border: 1px solid #EDEDF0;
+    font-size: 20px;
 }
 
 .left-content {
 padding: 20px;
+padding-left: 25px;
+}
+
+.statement_bold {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 3px;
+    margin-left: -2px;
 }
 
 .test-block {
@@ -36,7 +56,7 @@ padding: 20px;
 
 .test-header {
     background-color: #A8C860;
-    padding-left: 10px;
+    padding-left: 15px;
 }
 
 .test-inout {

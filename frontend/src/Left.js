@@ -6,7 +6,7 @@ import './Left.css';
 class Left extends Component {
     render() {
         return (
-            <div>
+            <div className="left_container">
                 <Statement />
                 <Testcase />
             </div>
