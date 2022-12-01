@@ -10,6 +10,7 @@ class Problem(models.Model):
     name = models.TextField(max_length=200)
     hardness = models.IntegerField()
     solved_ratio = models.FloatField()
+    complete_people = models.IntegerField(default=0)
     description = models.TextField()
     restrictions = models.TextField(null=True)
 
@@ -84,10 +85,13 @@ class UserProblems(models.Model):
     problem = models.ForeignKey('Problem', related_name='userProblem', on_delete=models.CASCADE)
 
 class Preset(models.Model):
+    st = "def solution(n):\n\tanswer = 0\n\treturn answer"
     id = models.BigAutoField(primary_key=True)
     user = models.ForeignKey('User', related_name="Preset", on_delete=models.CASCADE)
     problem = models.ForeignKey('Problem', related_name='Preset', on_delete=models.CASCADE)
-    preset1 = models.TextField()
-    preset2 = models.TextField()
-    preset3 = models.TextField()
-    last_code = models.TextField()
+    code = models.TextField(default=st)
+    preset_number= models.IntegerField(default=0)
+    # preset1 = models.TextField()
+    # preset2 = models.TextField()
+    # preset3 = models.TextField()
+    # last_code = models.TextField()
