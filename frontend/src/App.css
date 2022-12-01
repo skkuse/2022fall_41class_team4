@@ -6,7 +6,15 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+.userID {
+  float: right;
+  margin-top: -6vh;
+  margin-right: 1vh;
+  color: white;
+}
+.title {
+  float: left;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -65,7 +73,7 @@
   justify-content: center;
   background-color: #a0ca4e;
   position: relative;
-  margin-top: 40vh;
+  margin-top: 35vh;
 }
 #button {
   background-color: #3e77e0;
@@ -109,6 +117,7 @@ body {
   margin-top: 1vh;
   visibility: collapse;
 }
+
 .popup {
   position: absolute;
   width: 50vh;
@@ -150,7 +159,7 @@ body {
 .list {
   text-align: center;
 }
-.result{
+.result {
   text-align: center;
   font-size: 2rem;
 }
