@@ -10,12 +10,16 @@ class ProblemList extends React.Component {
 
     getProblemData = () => {
         // 임시 데이터 호출
-        const base = "https://jsonplaceholder.typicode.com/";
+        // const base = "https://jsonplaceholder.typicode.com/";
+        const base = "/";
 
-        axios.get(base + "users")
+        // axios.get(base + "users")
+        axios.get(base + "problemlist")
             .then(
                 (res) => {
-                    // console.log(res.data);
+                    console.log('!!!!!');
+                    console.log(res);
+                    console.log(res.data);
 
                     // 반환 형식 아직 정의되지 않음, 임시
                     this.setState({

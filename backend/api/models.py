@@ -10,6 +10,7 @@ class Problem(models.Model):
     name = models.TextField(max_length=200)
     hardness = models.IntegerField()
     solved_ratio = models.FloatField()
+    complete_people = models.IntegerField(default=0)
     description = models.TextField()
 
 
