@@ -142,3 +142,5 @@ pip-selfcheck.json
 # mpeltonen/sbt-idea plugin
 
 db.sqlite3
+
+*.sh

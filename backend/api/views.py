@@ -111,13 +111,13 @@ class PresetListAPI(APIView):
 
 class PresetAPI(APIView):
     # 특정 문제에 대한 사용자 코드 프리셋 조회
-    def get(self, request, user_id, problem_id):
-        preset = Preset.objects.get(user_id=user_id, problem_id=problem_id)
+    def get(self, request, user_id, problem_id, preset_number):
+        preset = Preset.objects.get_or_create(user_id=user_id, problem_id=problem_id,preset_number=preset_number)
         serializer = PresetSerializer(preset)
         return Response(serializer.data)
 
     # 사용자 최종 수정 코드 등록
-    def post(self, request, user_id, problem_id):
+    def post(self, request, user_id, problem_id, preset_number):
         serializer = PresetSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
