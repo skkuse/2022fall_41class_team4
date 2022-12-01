@@ -78,9 +78,9 @@ class User(AbstractUser):
 
 class UserProblems(models.Model):
     id = models.BigAutoField(primary_key=True)
-    user_score = models.IntegerField()
+    user_score = models.FloatField(default=0)
     last_date = models.DateField(auto_now_add=True)
-    user_code = models.TextField()
+    user_code = models.TextField(default="")
     user = models.ForeignKey('User', related_name="userProblem", on_delete=models.CASCADE) 
     problem = models.ForeignKey('Problem', related_name='userProblem', on_delete=models.CASCADE)
 

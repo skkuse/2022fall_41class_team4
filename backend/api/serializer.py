@@ -37,6 +37,11 @@ class UsersSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'email', 'username', 'password','is_active','is_admin')
 
+class UserProblemsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProblems
+        fields = ('id', 'last_date', 'user_code', 'problem_id','user_id','user_score')
+
 class PresetSerializer(serializers.ModelSerializer):
     class Meta:
         model = User

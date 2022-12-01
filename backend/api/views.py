@@ -256,20 +256,32 @@ class codeTestAPI(APIView):
 
             #get the problem's testcase
             problem = Problem.objects.get(id=problem_id)
+            user = get_user_model().objects.get(id=user_id)
             testCases = testCase.objects.filter(problem=problem)
+            userProblem, created = UserProblems.objects.get_or_create(user=user, problem=problem)
 
             #generate unittest code
             testcase_file = open("./api/userCodeTest/testcases_run.py", 'w')
-            testcase_init_list = ["import unittest\n", "import test\n","class solutionTest(unittest.TestCase):\n"]
+            testcase_init_list = ["import unittest\n", "import test\n","import traceback\n","class solutionTest(unittest.TestCase):\n"]
             testcase_file.writelines(testcase_init_list)
             
             for i, test_case in enumerate(testCases):
                 testcase_file.write(f"\tdef test{i}(self):\n")
-                testcase_file.write(f"\t\tself.assertEqual(test.solution({test_case.testCase_in[1:-1]}),{test_case.testCase_out[1:-1]})\n")
+                testcase_file.write(f"\t\ttry:\n")
+                testcase_file.write(f"\t\t\tself.assertEqual(test.solution({test_case.testCase_in[1:-1]}),{test_case.testCase_out[1:-1]})\n")
+                testcase_file.write(f"\t\t\tprint(f'success:{i}')\n")
+                testcase_file.write(f"\t\t\tprint(str(test.solution({test_case.testCase_in[1:-1]})))\n")
+                
+                testcase_file.write(f"\t\texcept Exception as error:\n")
+                testcase_file.write(f"\t\t\tprint('fail:{i}')\n")
+                testcase_file.write(f"\t\t\tprint(error)\n")
+                
+                
             
             testcase_close_list = ["if __name__ == '__main__':\n", "\tunittest.main()\n"]
             testcase_file.writelines(testcase_close_list)
             testcase_file.close()
+            
 
             #build docker file
             dockerfile_path='./api/userCodeTest/Dockerfile'
@@ -278,16 +290,62 @@ class codeTestAPI(APIView):
             test_docker_img, json_file = client.images.build(path=dockerfile_dir, dockerfile="Dockerfile")
 
             #make docker container
-            response = client.containers.run(test_docker_img,stdout=True,stderr=True, remove=True)
+            response=""
+            fail_count=0
+            fail_list=[]
             response_dict = {}
-            response_dict["result"] = str(response)
-            #response = str(response)
-            print(response)
-
-            #save user code to DB
+            response_dict["fails"] = []
+            response_dict["success"] = []
             
-
-            #update userProblem info
             
-            return Response(response_dict, status=status.HTTP_200_OK)
+            #test result
+            try:
+                response = client.containers.run(test_docker_img,stdout=True,stderr=True, remove=True)
+                response = response.decode('utf-8')
+                responses = response.split('\n')
+                print(f'responses= {responses}')
+                for i, res in enumerate(responses):
+                    if "fail" in res:
+                        temp = {}
+                        fail_count += 1
+                        fail_num = res.split(":")[1]
+                        fail_reason = responses[i+1]
+                        
+                        # fail_split = res.split(" ")
+                        # fail_num = fail_split[0].split(":")[1]
+                        # fail_reason = fail_split[1].split(":")[1]
+                        
+                        temp["fail_testcase_num"] = fail_num
+                        temp["fail_reasons"] = fail_reason
+                        response_dict["fails"].append(temp)
+                    elif "success" in res:
+                        temp = {}
+                        success_num = res.split(":")[1]
+                        usr_output = responses[i+1]
+                        
+                        # fail_split = res.split(" ")
+                        # fail_num = fail_split[0].split(":")[1]
+                        # fail_reason = fail_split[1].split(":")[1]
+                        
+                        temp["success_testcase_num"] = success_num
+                        temp["user_output"] = usr_output
+                        response_dict["success"].append(temp)
+                        
+                        
+                
+                userProblem.user_code = userCode
+                userProblem.user_score = (len(testCases)-fail_count) / len(testCases)
+                serializer =UserProblemsSerializer(userProblem)
+                response_dict["userProblemData"] = serializer.data
+                return Response(response_dict, status=status.HTTP_200_OK)
+                        
+            except docker.errors.ContainerError as error:
+                #responses = error.split("\n")
+                #print(responses)
+                print(error)
+                return Response("invalid code", status=status.HTTP_400_BAD_REQUEST)
+                print("error")
+            
+            
+            
             
