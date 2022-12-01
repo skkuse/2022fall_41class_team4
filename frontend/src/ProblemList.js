@@ -65,14 +65,12 @@ class ProblemList extends React.Component {
     }
 
     return (
-      //<div className="container max-w-screen-lg mx-auto">
       <div className="problemlist_container">
         <Header name={this.state.user} />
 
       <div className="problemlist_container_inner">
 
       <div className="problemlist_left_container">
-        {/* <div className="text-xl font-bold mt-5 mb-3 text-center problemtable"> */}
         <div className="problemlist_title">
           문제 목록
         </div>
@@ -90,34 +88,18 @@ class ProblemList extends React.Component {
         </div>    
       </div>
       <div className="problemlist_right_container">
-        <table className=" table-auto text-gray-800 problemtable">
-          <thead className="justify-between">
-            <tr class="banner">
-              <th className="px-4 py-3">번호</th>
-              <th className=" px-4 py-3">문제명</th>
-              <th className=" px-4 py-3">난이도</th>
-              <th className=" px-4 py-3">정답률</th>
-            </tr>
-          </thead>
+        <ul className="problemlist_list">
           <Tr
             ProblemData={this.state.ProblemData}
             search={this.state.search}
             id={this.state.id}
           />
-        </table>
+          <li>
+            <div className="problemlist_element"/>
+          </li>
+        </ul>
       </div>
-        {/* <div className="Search">
-          <Form.Group size="lg" controlId="email" class="passr">
-            <Form.Control
-              class="input"
-              placeholder="search"
-              autoFocus
-              type="text"
-              onChange={(e) => this.handleChange(e)}
-            />
-            <img src={require("./glass.png")} />
-          </Form.Group>
-        </div> */}
+
       
       </div>
       

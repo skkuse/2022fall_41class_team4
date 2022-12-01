@@ -4,21 +4,20 @@ import { Link, useNavigate } from "react-router-dom";
 class Td extends React.Component {
   render() {
     return (
-      <>
-        <tr
-          onClick={() => {
-            this.props.navigate(
-              "/problems/" + this.props.item.id + "?id=" + this.props.id
-            );
-          }}
-          className="bg-white border-2 border-gray-200"
-        >
-          <td className="px-4 py-3 list">{this.props.item.id}</td>
-          <td className="px-4 py-3 list">{this.props.item.name}</td>
-          <td className="px-4 py-3 list">{this.props.item.hardness}</td>
-          <td className="px-4 py-3 list">{this.props.item.solved_ratio}</td>
-        </tr>
-      </>
+      <div
+        onClick={() => {
+          this.props.navigate(
+            "/problems/" + this.props.item.id + "?id=" + this.props.id
+          );
+        }}
+      className="problemlist_element">
+        {/* <div className="px-4 py-3 list">{this.props.item.id}</td> */}
+        <div className="problem_name">{this.props.item.name}</div>
+        <div className="problem_statistics">
+          <div className={this.props.item.hardness === 1 ? "difficulty_veryeasy" : "difficulty_easy"}>난이도: {this.props.item.hardness}</div>
+          <div>정답률: {this.props.item.solved_ratio * 100}%</div>
+        </div>
+      </div>
     );
   }
 }

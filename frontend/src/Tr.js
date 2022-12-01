@@ -12,7 +12,7 @@ class Tr extends React.Component {
   }
   render() {
     return (
-      <tbody>
+      <li>
         {this.props.ProblemData.map((elem) => {
           var searched = this.props.search;
           var id = this.props.id;
@@ -20,7 +20,7 @@ class Tr extends React.Component {
           console.log(id);
           if (elem.name.includes(searched)) return <Td item={elem} id={id} />;
         })}
-      </tbody>
+      </li>
     );
   }
 }

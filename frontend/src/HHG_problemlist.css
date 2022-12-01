@@ -1,4 +1,4 @@
-.common_header_logout {
+/* .common_header_logout {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -68,7 +68,6 @@
 .prolemlist_left_container {
     float: right;
     width: 70%;
-    /* border: 1px solid red; */
 }
 
 .problemlist_title {
@@ -148,7 +147,7 @@
 
 .problem_statistics {
     display: grid;
-    grid-template-columns: 200px 150px 150px;
+    grid-template-columns: 200px 150px;
     text-align: left;
 }
 
@@ -181,4 +180,4 @@
 
 .problemlist_selector {
     font-weight: bold;
-}
+} */

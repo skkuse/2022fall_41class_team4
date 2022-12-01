@@ -50,8 +50,9 @@ class Login extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="login_total_container">
         <Header />
+        <div className="login_container">
         <div className="Login">
           <Form id="form">
             <Button
@@ -95,7 +96,8 @@ class Login extends React.Component {
           </Button>
           {this.state.seen ? <Popup toggle={this.togglePop} /> : null}
         </div>
-      </>
+        </div>
+      </div>
     );
   }
 }

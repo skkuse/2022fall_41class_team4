@@ -59,6 +59,24 @@
   width: 50vh;
   margin: auto;
 }
+.login_total_container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.login_container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  /* background-image: url("img/intro.png"); */
+  background-color: #E6E6E6;
+}
+.header {
+  margin: 0px;
+  background-color: #0E151B ;
+  color: white;
+}
 .Login {
   margin: auto;
   text-align: center;
@@ -67,11 +85,13 @@
   justify-content: center;
 }
 .Login {
-  height: 20vh;
+  height: 30vh;
+  width: 30vw;
+  border-radius: 1rem;
   align-items: center;
   display: flex;
   justify-content: center;
-  background-color: #a0ca4e;
+  background-color: #0E151B;
   position: relative;
   margin-top: 35vh;
 }
@@ -141,11 +161,6 @@ body {
   margin-bottom: 7vh;
 }
 
-.header {
-  margin: 0px;
-  background-color: #0E151B ;
-  color: white;
-}
 #root {
   margin: 0px;
 }
