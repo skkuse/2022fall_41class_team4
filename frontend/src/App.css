@@ -6,10 +6,14 @@
   height: 40vmin;
   pointer-events: none;
 }
+.userID {
+  float: right;
+  margin-top: -6vh;
+  margin-right: 1vh;
+  color: white;
+}
 .title {
-  text-align: center;
-  margin: 0;
-  padding-left: 6.5vw;
+  float: left;
 }
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -69,7 +73,7 @@
   justify-content: center;
   background-color: #a0ca4e;
   position: relative;
-  margin-top: 40vh;
+  margin-top: 35vh;
 }
 #button {
   background-color: #3e77e0;

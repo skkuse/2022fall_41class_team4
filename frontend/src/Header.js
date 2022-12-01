@@ -12,11 +12,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 class Header extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      data: this.props.dataParentToChild,
-    };
   }
+
   render() {
     return (
       <AppBar class="header" position="static">
@@ -29,7 +26,7 @@ class Header extends React.Component {
           >
             SKKU USE
           </Typography>
-          <Button color="inherit">{this.state.data}</Button>
+          <Button color="inherit">{this.props.name}</Button>
         </Toolbar>
       </AppBar>
     );
