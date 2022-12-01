@@ -89,7 +89,7 @@ class Preset(models.Model):
     user = models.ForeignKey('User', related_name="Preset", on_delete=models.CASCADE)
     problem = models.ForeignKey('Problem', related_name='Preset', on_delete=models.CASCADE)
     code = models.TextField(default="")
-    preset_number= models.IntegerField()
+    preset_number= models.IntegerField(default=0)
     # preset1 = models.TextField()
     # preset2 = models.TextField()
     # preset3 = models.TextField()

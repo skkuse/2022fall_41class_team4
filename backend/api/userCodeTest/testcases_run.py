@@ -12,11 +12,19 @@ class solutionTest(unittest.TestCase):
 			print(error)
 	def test1(self):
 		try:
-			self.assertEqual(test.solution(102, 12),10)
+			self.assertEqual(test.solution(6,4),2)
 			print(f'success:1')
-			print(str(test.solution(102, 12)))
+			print(str(test.solution(6,4)))
 		except Exception as error:
 			print('fail:1')
+			print(error)
+	def test2(self):
+		try:
+			self.assertEqual(test.solution(127, 20),107)
+			print(f'success:2')
+			print(str(test.solution(127, 20)))
+		except Exception as error:
+			print('fail:2')
 			print(error)
 if __name__ == '__main__':
 	unittest.main()
