@@ -30,3 +30,5 @@ virtualenv-clone==0.5.7
 virtualenvwrapper==4.8.4
 Werkzeug==2.1.2
 zipp==3.8.0
+multimetric
+copydetect
