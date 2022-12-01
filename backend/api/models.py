@@ -12,6 +12,7 @@ class Problem(models.Model):
     solved_ratio = models.FloatField()
     complete_people = models.IntegerField(default=0)
     description = models.TextField()
+    restrictions = models.TextField(null=True)
 
 
 class Answer(models.Model):
