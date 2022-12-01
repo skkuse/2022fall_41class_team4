@@ -128,7 +128,7 @@ class PresetAPI(APIView):
         serializer = PresetSerializer(preset)
         return Response(serializer.data)
 
-    # 사용자 최종 수정 코드 등록
+    # 사용자 최종 수정 코드 등록 -> localStorage 사용
     def post(self, request):
         reqData = request.data
         user_id = reqData['user_id']
