@@ -7,11 +7,18 @@
     height: 70px;
     padding-left: 11px;
     padding-right: 11px;
-    justify-content: space-between;
 }
 
 .home_button {
-    
+    display: flex;
+    flex-direction: row;
+    align-items: center;    
+}
+
+.skku {
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
 }
 
 .lecture_info {
@@ -46,6 +53,25 @@
     padding-right: 13px;
 }
 
+.common_header_group1 {
+    display: flex;
+    justify-content: space-between;
+    width: 510px;
+}
+
+.common_header_group2 {
+    display: flex;
+    justify-content: space-between;
+    width: 210px;
+}
+
+.common_header_space1 {
+    width: 380px;
+}
+
+.common_header_space2 {
+    width: 300px;
+}
 
 
 .common_footer {
@@ -54,8 +80,8 @@
     background-color: #0E151B;
     color: white;
     height: 70px;
-    padding-left: 11px;
-    padding-right: 11px;
+    padding-left: 16px;
+    padding-right: 16px;
     justify-content: space-between;
 }
 

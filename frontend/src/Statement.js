@@ -37,7 +37,7 @@ class Statement extends Component {
             this.getStatementData();
         }
         return (
-            <div>
+            <div className="statement_container">
                 <div className="left-header">
                 {/* {console.log("start")}
                 {console.log(this.state.StatementData.description)}
@@ -45,12 +45,16 @@ class Statement extends Component {
                 문제 설명
                 </div>
                 <div className="left-content">
-                    <b>문제</b>
+                    <div className="statement_bold">
+                        문제
+                    </div>
                     <div>
                         {this.state.StatementData.description}
                     </div>
                     <br/>
-                    <b>제약사항</b>
+                    <div className="statement_bold">
+                        제약사항
+                    </div>
                     <div>
                         {this.state.StatementData.restrictions}
                     </div>
