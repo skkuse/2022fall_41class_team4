@@ -293,8 +293,15 @@ class codeTestAPI(APIView):
 
             #generate unittest code
             testcase_file = open("./api/userCodeTest/testcases_run.py", 'w')
-            testcase_init_list = ["import unittest\n", "import test\n","import traceback\n","class solutionTest(unittest.TestCase):\n"]
+            testcase_init_list = ["import unittest\n","import test\n" "import traceback\n","class solutionTest(unittest.TestCase):\n"]
             testcase_file.writelines(testcase_init_list)
+            
+            testcase_file.write(f"\ttry:\n")
+            testcase_file.write(f"\t\timport test\n")
+            testcase_file.write(f"\texcept Exception as error:\n")
+            testcase_file.write(f"\t\tprint('fail:0')\n")
+            testcase_file.write(f"\t\tprint(error)\n")
+            testcase_file.write(f"\t\texit(1)\n\n")
             
             for i, test_case in enumerate(testCases):
                 testcase_file.write(f"\tdef test{i}(self):\n")
@@ -383,8 +390,10 @@ class codeTestAPI(APIView):
             except docker.errors.ContainerError as error:
                 #responses = error.split("\n")
                 #print(responses)
+                response_dict['status']="failed"
+                response_dict['reason']=str(error)
                 print(error)
-                return Response("invalid code", status=status.HTTP_400_BAD_REQUEST)
+                return Response(response_dict, status=status.HTTP_400_BAD_REQUEST)
                 print("error")
             
             
