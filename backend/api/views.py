@@ -337,6 +337,7 @@ class codeTestAPI(APIView):
             
             #test result
             try:
+                response_dict['status']="succeed"
                 response = client.containers.run(test_docker_img,stdout=True,stderr=True, remove=True)
                 response = response.decode('utf-8')
                 responses = response.split('\n')
