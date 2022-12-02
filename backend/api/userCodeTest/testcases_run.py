@@ -2,6 +2,13 @@ import unittest
 import test
 import traceback
 class solutionTest(unittest.TestCase):
+	try:
+		import test
+	except Exception as error:
+		print('fail:0')
+		print(error)
+		exit(1)
+
 	def test0(self):
 		try:
 			self.assertEqual(test.solution(2,1),1)
