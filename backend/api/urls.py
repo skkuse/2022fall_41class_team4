@@ -11,7 +11,7 @@ urlpatterns = [
    path('users', UserRegisterAPI.as_view()),
 
    path('answers', AnswerListAPI.as_view()),
-   path('answers/<int:answer_id>', AnswerAPI.as_view()),
+   path('answers/<int:problem_id>', AnswerAPI.as_view()),
 
 
    path('testcase', TestCaseListAPI.as_view()),

@@ -40,24 +40,27 @@ class AnswerListAPI(APIView):
 
 class AnswerAPI(APIView):
     # 문제 답안 조회
-    def get(self, request, answer_id):
-        model = Answer.objects.get(id=answer_id)
-        serializer = AnswerSerializer(model)
+    def get(self, request, problem_id):
+        problem = Problem.objects.get(id = problem_id)
+        answer = Answer.objects.get(problem=problem)
+        serializer = AnswerSerializer(answer)
         return Response(serializer.data)
 
     # 문제 답안 수정
-    def patch(self, request, answer_id):
-        model = Answer.objects.get(id=answer_id)
-        serializer = AnswerSerializer(model, data=request.data, partial=True)
+    def patch(self, request, problem_id):
+        problem = Problem.objects.get(id = problem_id)
+        answer = Answer.objects.get(problem=problem)
+        serializer = AnswerSerializer(answer, data=request.data, partial=True)
         if (serializer.is_valid()):
             serializer.save()
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     # 문제 답안 삭제
-    def delete(self, request, answer_id):
-        model = Answer.objects.get(id=answer_id)
-        model.delete()
+    def delete(self, request, problem_id):
+        problem = Problem.objects.get(id = problem_id)
+        answer = Answer.objects.get(problem=problem)
+        answer.delete()
         return Response({}, status=status.HTTP_204_NO_CONTENT)
 
 
