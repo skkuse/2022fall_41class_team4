@@ -374,19 +374,22 @@ class codeTestAPI(APIView):
                         
                 #efficiency test
                 exit_code, console_result = subprocess.getstatusoutput(f"multimetric {os.getcwd()}/api/userCodeTest/test.py")
+                json_result = json.loads(console_result)
+                overall_metric_score = json_result['overall']['pylint']
                 
                 #readability test
                 exit_code, pylama_result = subprocess.getstatusoutput(f"pylama {os.getcwd()}/api/userCodeTest/test.py")
                 pylama_error_list = pylama_result.split("\n")
                 
-                #print(console_result)
-                json_result = json.loads(console_result)
-                overall_metric_score = json_result['overall']['pylint']
+                #functional test
                 userProblem.user_code = userCode
                 userProblem.user_score = (len(testCases)-fail_count) / len(testCases)
+                
                 serializer =UserProblemsSerializer(userProblem)
+                
                 # save to userProblem db
                 userProblem.save()
+                
                 #generate response
                 response_dict["similarity_with_answer_code"] = 0.0
                 response_dict["efficiency_score"] = overall_metric_score
