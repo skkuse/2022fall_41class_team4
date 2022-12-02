@@ -7,7 +7,7 @@ class solutionTest(unittest.TestCase):
 	except Exception as error:
 		print('fail:0')
 		print(error)
-	exit(1)
+		exit(1)
 
 	def test0(self):
 		try:

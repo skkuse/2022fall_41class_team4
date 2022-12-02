@@ -385,6 +385,9 @@ class codeTestAPI(APIView):
                 userProblem.user_code = userCode
                 userProblem.user_score = (len(testCases)-fail_count) / len(testCases)
                 serializer =UserProblemsSerializer(userProblem)
+                # save to userProblem db
+                userProblem.save()
+                #generate response
                 response_dict["similarity_with_answer_code"] = 0.0
                 response_dict["efficiency_score"] = overall_metric_score
                 response_dict["readability_score"] = "-"+str(len(pylama_error_list))
