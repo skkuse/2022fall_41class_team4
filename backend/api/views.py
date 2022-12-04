@@ -13,9 +13,8 @@ import backend
 from rest_framework.views import APIView
 from api.models import User as Custom_User
 import json
-from copydetect import CopyDetector
-import copydetect
 import subprocess
+import pycode_similar
 
 
 # todo: 에러코드 구체화
@@ -385,6 +384,14 @@ class codeTestAPI(APIView):
                 userProblem.user_code = userCode
                 userProblem.user_score = (len(testCases)-fail_count) / len(testCases)
                 
+                #copy detect
+                #ref from https://pypi.org/project/pycode-similar/
+                exit_code, copy_detect_result = subprocess.getstatusoutput(f"pycode_similar {os.getcwd()}/api/userCodeTest/test.py {os.getcwd()}/api/userCodeTest/answer.py")
+                #copy_detect_result = pycode_similar.detect([os.getcwd()+"/api/userCodeTest/test.py", os.getcwd()+"/api/userCodeTest/answer.py"], diff_method=pycode_similar.UnifiedDiff, keep_prints=False, module_level=False)
+                
+                copy_detect_result_list = copy_detect_result.split("\n")
+                print(f'copy_detect_result = {copy_detect_result_list}, type={type(copy_detect_result_list)}')
+                
                 serializer =UserProblemsSerializer(userProblem)
                 
                 # save to userProblem db
@@ -394,6 +401,7 @@ class codeTestAPI(APIView):
                 response_dict["similarity_with_answer_code"] = 0.0
                 response_dict["efficiency_score"] = overall_metric_score
                 response_dict["readability_score"] = "-"+str(len(pylama_error_list))
+                response_dict["copytest_info"] = copy_detect_result_list[2]
                 response_dict["userProblemData"] = serializer.data
                 return Response(response_dict, status=status.HTTP_200_OK)
                         
