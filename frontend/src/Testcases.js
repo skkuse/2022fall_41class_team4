@@ -41,20 +41,23 @@ class Testcases extends Component {
     var i = 1;
     return (
       <>
-        <div className="left-header">테스트 케이스</div>
-
+        <div className="testcases">테스트 케이스 실행결과</div> <br/>
+          <span class="theader1">Testcase Output</span> <span class="theader"></span> <span class="theader">O/X </span>
         {
           this.props.testCaseList.map((elem) => {
             return (
-              <div className="left-header">
+              <div className="leftheader">
                 <span className="testcase">
                   {`${i++}번` + (i <= 4 ? " 공개된 " : " 히든 ") + `테스트에 대한 채점 결과입니다.`}
                 </span>
-                <br />
+                <span className="comp">
+                {i <= 4 ? (elem[0] == 0 ? elem[1] : elem[1] + " == " + elem[1]) : ("")}
+                </span>
                 <span className="results">
+                
                   {elem[0] == 0 ? "틀렸습니다" : "맞았습니다!!"}
-                  <br />
-                  {i <= 4 ? (elem[0] == 0 ? elem[1] : elem[1] + " == " + elem[1]) : ("")}
+                  
+                  
                 </span>
 
                 <br />
