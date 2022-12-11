@@ -151,3 +151,19 @@
     flex-grow: 1;
     background-color: #E6E6E6;
 }
+
+.button_group_1 {
+    
+}
+
+.button_group_2 {
+    margin-left: 80px;
+}
+
+.button_group_3 {
+    margin-left: 50px;
+}
+
+.button_group_4 {
+    margin-left: 15px;
+}

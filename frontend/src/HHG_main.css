@@ -9,6 +9,17 @@
     padding-right: 11px;
 }
 
+.common_footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #0E151B;
+    color: white;
+    height: 70px;
+    padding-left: 11px;
+    padding-right: 11px;
+}
+
 .home_button {
     display: flex;
     flex-direction: row;

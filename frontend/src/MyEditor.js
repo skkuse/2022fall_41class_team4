@@ -268,55 +268,62 @@ function MyEditor({ no }) {
   return (
     <div className="myeditor_content">
       <div className="up_buttonlist">
-        <button className="blue_button" onClick={codeInit}>
-          초기화
-        </button>
-        <button className="blue_button" onClick={codeSave}>
-          저장
-        </button>
-        <button className="blue_button" onClick={codeLoad}>
-          불러오기
-        </button>
-        <button className="blue_button" onClick={execute}>
-          실행
-        </button>
-        <button className="blue_button" onClick={testCode}>
-          채점
-        </button>
-        <button className="blue_button" onClick={copyCode}>
-          복사
-        </button>
-        <button className="blue_button" onClick={importData}>
-          파일 업로드
-        </button>
-        <button className="red_button" onClick={submit}>
-          제출
-        </button>
-
-        <button
-          className="file_button_saved"
-          onClick={() => {
-            preset_id = 1;
-          }}
-        >
-          1
-        </button>
-        <button
-          className="file_button_saved"
-          onClick={() => {
-            preset_id = 2;
-          }}
-        >
-          2
-        </button>
-        <button
-          className="file_button_saved"
-          onClick={() => {
-            preset_id = 3;
-          }}
-        >
-          3
-        </button>
+        <div className="button_group_1">
+          <button
+            className="file_button_saved"
+            onClick={() => {
+              preset_id = 1;
+            }}
+          >
+            1
+          </button>
+          <button
+            className="file_button_saved"
+            onClick={() => {
+              preset_id = 2;
+            }}
+          >
+            2
+          </button>
+          <button
+            className="file_button_saved"
+            onClick={() => {
+              preset_id = 3;
+            }}
+          >
+            3
+          </button>
+        </div>
+        <div className="button_group_2">
+          <button className="blue_button" onClick={codeInit}>
+            초기화
+          </button>
+          <button className="blue_button" onClick={codeSave}>
+            저장
+          </button>
+          <button className="blue_button" onClick={execute}>
+            실행
+          </button>
+        </div>
+        <div className="button_group_3">
+          <button className="blue_button" onClick={codeLoad}>
+            불러오기
+          </button>
+          <button className="blue_button" onClick={copyCode}>
+            복사
+          </button>
+          <button className="blue_button" onClick={importData}>
+            파일 업로드
+          </button>
+        </div>
+        <div className="button_group_4">
+          <button className="blue_button" onClick={testCode}>
+            채점
+          </button>
+          <button className="red_button" onClick={submit}>
+            제출
+          </button>
+        </div>
       </div>
       <Editor
         height="35vh"

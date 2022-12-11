@@ -48,10 +48,12 @@ function Left() {
   return (
     <div className="left_content">
       <div className="common_header_login">
-        <div className="home_button">
-          <img className="skku" alt="skku" src={skku_icon} />
-          <div>코딩테스트 연습</div>
+        <a href="/problemlist">
+          <div className="home_button">
+            <img className="skku" alt="skku" src={skku_icon} />
+            <div>코딩테스트 연습</div>
         </div>
+        </a>
         <div className="common_header_space1" />
         <div className="common_header_group1">
           {/* <div className="lecture_info">
@@ -91,6 +93,9 @@ function Left() {
           <MyEditor no={no} />
         </Pane>
       </SplitPane>
+      <div className="common_footer">
+        this is footer
+      </div>
     </div>
   );
 }
