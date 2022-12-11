@@ -285,7 +285,7 @@ function MyEditor({ no }) {
           <button
             className="file_button_saved"
             onClick={() => {
-              preset_id = 1;
+              SetPresetId(1);
             }}
           >
             1
@@ -293,7 +293,7 @@ function MyEditor({ no }) {
           <button
             className="file_button_saved"
             onClick={() => {
-              preset_id = 2;
+              SetPresetId(2);
             }}
           >
             2
@@ -301,7 +301,7 @@ function MyEditor({ no }) {
           <button
             className="file_button_saved"
             onClick={() => {
-              preset_id = 3;
+              SetPresetId(3);
             }}
           >
             3
