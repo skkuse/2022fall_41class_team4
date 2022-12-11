@@ -16,7 +16,7 @@ function MyEditor({ no }) {
   const editorRef = useRef(null);
   const [userId, setUserId] = useState(0);
   const [defaultCode, setDefaultCode] = useState("");
-  const [presetId, SetPresetId] = useState(1);
+  const [presetId, setPresetId] = useState(1);
   const [tabState, setTabState] = useState(3);
   const [userCode, setUserCode] = useState("");
   const [correctCode, setCorrectCode] = useState("");
@@ -150,6 +150,8 @@ function MyEditor({ no }) {
   }
 
   function testCode() {
+    alert("각 테스트케이스에 대하여 채점을 진행합니다.");
+
     axios
       .post("http://146.56.165.145:8000/api/testcase/test/", {
         user_id: userId,
@@ -157,6 +159,7 @@ function MyEditor({ no }) {
         user_code: editorRef.current.getValue(),
       })
       .then(function (res) {
+        console.log(res.data);
         setTabState(2);
       })
       .catch(function (error) {
@@ -285,7 +288,7 @@ function MyEditor({ no }) {
           <button
             className="file_button_saved"
             onClick={() => {
-              SetPresetId(1);
+              setPresetId(1);
             }}
           >
             1
@@ -293,7 +296,7 @@ function MyEditor({ no }) {
           <button
             className="file_button_saved"
             onClick={() => {
-              SetPresetId(2);
+              setPresetId(2);
             }}
           >
             2
@@ -301,7 +304,7 @@ function MyEditor({ no }) {
           <button
             className="file_button_saved"
             onClick={() => {
-              SetPresetId(3);
+              setPresetId(3);
             }}
           >
             3
@@ -375,7 +378,7 @@ function MyEditor({ no }) {
         <div className="realout">
           {
             <>
-              {tabState === 1 ? <StandardOutput /> : <></>}
+              {tabState === 1 ? <StandardOutput stdoutCaseList={stdoutCaseList} /> : <></>}
 
               {tabState === 2 ? <Testcases /> : <></>}
 
