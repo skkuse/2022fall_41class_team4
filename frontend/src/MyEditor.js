@@ -20,8 +20,8 @@ import "./HHG_right_up.css";
 
 function MyEditor({ no }) {
   const editorRef = useRef(null);
-  const defaultCode = "def solution(num1, num2) {\n    \n}";
-
+  var defaultCode = "";
+  var user_id = 0;
   var preset_id = 1;
 
   const [tabState, setTabState] = useState(3);
@@ -36,12 +36,32 @@ function MyEditor({ no }) {
   const [effScore, setEffScore] = useState(100);
   const [readScore, setReadScore] = useState(100);
 
+
+  useEffect(() => {
+    axios
+      .get(`http://146.56.165.145:8000/api/answers/${no}`)
+      .then(function (res3) {
+        user_id = new URLSearchParams(window.location.search).get("id");
+        defaultCode = res3.data.answer_code;
+        defaultCode = defaultCode.substring(0, defaultCode.indexOf('\n'));
+      })
+      .catch(function (error3) {
+        console.log(error3);
+      });
+  }, []);
+
+
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor;
-    if (localStorage.getItem("key") == null) {
-      localStorage.setItem("key", defaultCode);
-    }
+    localStorage.setItem("key", defaultCode);
     editorRef.current.getModel().setValue(localStorage.getItem("key"));
+
+
+
+    // if (localStorage.getItem("key") == null) {
+    //   localStorage.setItem("key", defaultCode);
+    // }
+    // editorRef.current.getModel().setValue(localStorage.getItem("key"));
   }
 
   function handleEdiorChange(value, event) {
@@ -53,7 +73,7 @@ function MyEditor({ no }) {
 
     axios
       .post("http://146.56.165.145:8000/api/testcase/test/", {
-        user_id: 1,
+        user_id: user_id,
         problem_id: no,
         user_code: editorRef.current.getValue(),
       })
@@ -138,7 +158,7 @@ function MyEditor({ no }) {
   function testCode() {
     axios
       .post("http://146.56.165.145:8000/api/testcase/test/", {
-        user_id: 1,
+        user_id: user_id,
         problem_id: no,
         user_code: editorRef.current.getValue(),
       })
@@ -167,7 +187,7 @@ function MyEditor({ no }) {
   function codeSave() {
     axios
       .post(`http://146.56.165.145:8000/api/preset`, {
-        user_id: 1,
+        user_id: user_id,
         problem_id: no,
         user_code: editorRef.current.getValue(),
         preset_number: preset_id,
@@ -185,7 +205,7 @@ function MyEditor({ no }) {
     const headers = {
       "Content-type": "application/json",
       Authorization:
-        "Bearer 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",
+        "Bearer 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",
     };
 
     axios
