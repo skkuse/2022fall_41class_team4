@@ -37,30 +37,36 @@ function MyEditor({ no }) {
   const [effScore, setEffScore] = useState(100);
   const [readScore, setReadScore] = useState(100);
 
+
   useEffect(() => {
     axios
       .get(`http://146.56.165.145:8000/api/answers/${no}`)
       .then(function (res3) {
         user_id = new URLSearchParams(window.location.search).get("id");
         defaultCode = res3.data.answer_code;
-        defaultCode = defaultCode.substring(0, defaultCode.indexOf("\n"));
+        defaultCode = defaultCode.substring(0, defaultCode.indexOf('\n'));
+
+
+        if (localStorage.getItem(user_id) == null) {
+          localStorage.setItem(user_id, defaultCode);
+        }
       })
       .catch(function (error3) {
         console.log(error3);
       });
   }, []);
 
+
+
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor;
 
-    // if (localStorage.getItem("key") == null) {
-    //   localStorage.setItem("key", defaultCode);
-    // }
-    // editorRef.current.getModel().setValue(localStorage.getItem("key"));
+    while (localStorage.getItem(user_id) == null) { }
+    editorRef.current.getModel().setValue(localStorage.getItem(user_id));
   }
 
   function handleEdiorChange(value, event) {
-    localStorage.setItem("key", value);
+    localStorage.setItem(user_id, value);
   }
 
   function submit() {
@@ -168,7 +174,7 @@ function MyEditor({ no }) {
 
   function codeLoad() {
     axios
-      .get(`http://146.56.165.145:8000/api/preset/1/${no}/${preset_id}`)
+      .get(`http://146.56.165.145:8000/api/preset/${user_id}/${no}/${preset_id}`)
       .then(function (res) {
         console.log(res.data);
         editorRef.current.getModel().setValue(res.data.code);
