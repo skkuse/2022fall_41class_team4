@@ -13,6 +13,7 @@ class Problem(models.Model):
     complete_people = models.IntegerField(default=0)
     description = models.TextField()
     restrictions = models.TextField(null=True)
+    reference = models.TextField(null=True)
 
 
 class Answer(models.Model):

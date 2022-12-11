@@ -22,10 +22,6 @@ import pycode_similar
 # todo: CustomUser 바꾸기
 
 class AnswerListAPI(APIView):
-    # def get(self, request):
-    #     answer_list = Answer.objects.all()
-    #     serializer = ProblemListSerializer(answer_list, many=True)
-    #     return Response(serializer.data)
 
     # 문제 답안 등록
     def post(self, request):
@@ -99,11 +95,6 @@ class TestCaseAPI(APIView):
 
 
 class PresetListAPI(APIView):
-    # def get(self, request):
-    #     problem_list = Problem.objects.all()
-    #     serializer = ProblemSerializer(problem_list, many=True)
-    #     return Response(serializer.data)
-
     # 사용자 코드 프리셋 등록
     def post(self, request):
         reqData = request.data
@@ -151,11 +142,13 @@ class PresetAPI(APIView):
 
 
 class ProblemListAPI(APIView):
+    #모든 문제 리스트 조회
     def get(self, request):
         problem_list = Problem.objects.all()
         serializer = ProblemSerializer(problem_list, many=True)
         return Response(serializer.data)
 
+    #문제 리스트에 문제 추가
     def post(self, request):
         serializer = ProblemSerializer(data=request.data)
         if serializer.is_valid():
