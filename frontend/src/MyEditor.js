@@ -174,7 +174,7 @@ function MyEditor({ no }) {
 
   function codeLoad() {
     axios
-      .get(`http://146.56.165.145:8000/api/preset/1/${no}/${preset_id}`)
+      .get(`http://146.56.165.145:8000/api/preset/${user_id}/${no}/${preset_id}`)
       .then(function (res) {
         console.log(res.data);
         editorRef.current.getModel().setValue(res.data.code);
