@@ -9,18 +9,14 @@ class StandardOutput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      testcaseone: "",
-      testcasetwo: "",
-      testcasethree: "",
-      resultone: "",
-      resulttwo: "",
-      resultthree: "",
+      output: "",
     };
   }
   render() {
     return (
       <>
         <div className="banner">테스트케이스:</div>
+        <div>{this.state.output}</div>
       </>
     );
   }

@@ -6,6 +6,7 @@ import axios from "axios";
 import CodeDiff from "react-code-diff-lite";
 import Result from "./Result";
 import StandardOutput from "./StandardOutput";
+import Testcases from "./Testcases";
 import "./HHG_main.css";
 import "./HHG_problemlist.css";
 import "./HHG_right_down.css";
@@ -36,27 +37,23 @@ function MyEditor({ no }) {
   const [effScore, setEffScore] = useState(100);
   const [readScore, setReadScore] = useState(100);
 
-
   useEffect(() => {
     axios
       .get(`http://146.56.165.145:8000/api/answers/${no}`)
       .then(function (res3) {
         user_id = new URLSearchParams(window.location.search).get("id");
         defaultCode = res3.data.answer_code;
-        defaultCode = defaultCode.substring(0, defaultCode.indexOf('\n'));
+        defaultCode = defaultCode.substring(0, defaultCode.indexOf("\n"));
       })
       .catch(function (error3) {
         console.log(error3);
       });
   }, []);
 
-
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor;
     localStorage.setItem("key", defaultCode);
     editorRef.current.getModel().setValue(localStorage.getItem("key"));
-
-
 
     // if (localStorage.getItem("key") == null) {
     //   localStorage.setItem("key", defaultCode);
@@ -356,7 +353,7 @@ function MyEditor({ no }) {
             <>
               {tabState === 1 ? <StandardOutput /> : <></>}
 
-              {tabState === 2 ? <>총점: 60점</> : <></>}
+              {tabState === 2 ? <Testcases /> : <></>}
 
               {tabState === 3 ? (
                 <>
