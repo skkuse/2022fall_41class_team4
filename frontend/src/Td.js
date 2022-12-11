@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 class Td extends React.Component {
   render() {
@@ -10,7 +10,7 @@ class Td extends React.Component {
             "/problems/" + this.props.item.id + "?id=" + this.props.id
           );
         }}
-      className="problemlist_element">
+        className="problemlist_element">
         {/* <div className="px-4 py-3 list">{this.props.item.id}</td> */}
         <div className="problem_name">{this.props.item.name}</div>
         <div className="problem_statistics">

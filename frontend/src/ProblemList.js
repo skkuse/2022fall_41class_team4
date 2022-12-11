@@ -1,10 +1,10 @@
 import React from "react";
 import axios from "axios";
 import Tr from "./Tr";
-import Button from "react-bootstrap/Button";
 import Header from "./Header";
 import Form from "react-bootstrap/Form";
 import "./problemlist.css";
+
 class ProblemList extends React.Component {
   state = {
     ProblemData: [],
@@ -14,9 +14,6 @@ class ProblemList extends React.Component {
     search: " ",
   };
   componentDidMount() {
-    // Changing the state after 2 sec
-    // from the time when the component
-    // is rendered
 
     const params = new URLSearchParams(window.location.search);
     var name = params.get("username");
@@ -68,41 +65,41 @@ class ProblemList extends React.Component {
       <div className="problemlist_container">
         <Header name={this.state.user} />
 
-      <div className="problemlist_container_inner">
+        <div className="problemlist_container_inner">
 
-      <div className="problemlist_left_container">
-        <div className="problemlist_title">
-          문제 목록
+          <div className="problemlist_left_container">
+            <div className="problemlist_title">
+              문제 목록
+            </div>
+            <div className="Search">
+              <Form.Group size="lg" controlId="email" class="passr">
+                <Form.Control
+                  class="input"
+                  placeholder="search"
+                  autoFocus
+                  type="text"
+                  onChange={(e) => this.handleChange(e)}
+                />
+                <img src={require("./glass.png")} />
+              </Form.Group>
+            </div>
+          </div>
+          <div className="problemlist_right_container">
+            <ul className="problemlist_list">
+              <Tr
+                ProblemData={this.state.ProblemData}
+                search={this.state.search}
+                id={this.state.id}
+              />
+              <li>
+                <div className="problemlist_element" />
+              </li>
+            </ul>
+          </div>
+
+
         </div>
-        <div className="Search">
-          <Form.Group size="lg" controlId="email" class="passr">
-            <Form.Control
-              class="input"
-              placeholder="search"
-              autoFocus
-              type="text"
-              onChange={(e) => this.handleChange(e)}
-            />
-            <img src={require("./glass.png")} />
-          </Form.Group>
-        </div>    
-      </div>
-      <div className="problemlist_right_container">
-        <ul className="problemlist_list">
-          <Tr
-            ProblemData={this.state.ProblemData}
-            search={this.state.search}
-            id={this.state.id}
-          />
-          <li>
-            <div className="problemlist_element"/>
-          </li>
-        </ul>
-      </div>
 
-      
-      </div>
-      
       </div>
     );
   }

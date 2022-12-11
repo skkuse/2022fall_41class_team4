@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Form from "react-bootstrap/Form";
 
@@ -53,49 +53,49 @@ class Login extends React.Component {
       <div className="login_total_container">
         <Header />
         <div className="login_container">
-        <div className="Login">
-          <Form id="form">
+          <div className="Login">
+            <Form id="form">
+              <Button
+                id="new1"
+                block
+                size="lg"
+                onClick={() => this.handleClick()}
+              >
+                New Account
+              </Button>
+              <Form.Group size="lg" controlId="email" class="passr">
+                <Form.Control
+                  class="input"
+                  placeholder="ID"
+                  autoFocus
+                  type="text"
+                  onChange={(e) => this.handleChange(e)}
+                />
+              </Form.Group>
+
+              <Form.Group size="lg" controlId="password" class="passr">
+                <Form.Control
+                  class="input"
+                  placeholder="Password"
+                  type="password"
+                  onChange={(e) => this.handleChange1(e)}
+                />
+              </Form.Group>
+              <Button id="new" block size="lg" onClick={this.togglePop}>
+                New Account
+              </Button>
+            </Form>
+
             <Button
-              id="new1"
+              id="button"
               block
               size="lg"
               onClick={() => this.handleClick()}
             >
-              New Account
+              Login
             </Button>
-            <Form.Group size="lg" controlId="email" class="passr">
-              <Form.Control
-                class="input"
-                placeholder="ID"
-                autoFocus
-                type="text"
-                onChange={(e) => this.handleChange(e)}
-              />
-            </Form.Group>
-
-            <Form.Group size="lg" controlId="password" class="passr">
-              <Form.Control
-                class="input"
-                placeholder="Password"
-                type="password"
-                onChange={(e) => this.handleChange1(e)}
-              />
-            </Form.Group>
-            <Button id="new" block size="lg" onClick={this.togglePop}>
-              New Account
-            </Button>
-          </Form>
-
-          <Button
-            id="button"
-            block
-            size="lg"
-            onClick={() => this.handleClick()}
-          >
-            Login
-          </Button>
-          {this.state.seen ? <Popup toggle={this.togglePop} /> : null}
-        </div>
+            {this.state.seen ? <Popup toggle={this.togglePop} /> : null}
+          </div>
         </div>
       </div>
     );

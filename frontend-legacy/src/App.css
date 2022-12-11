@@ -1,0 +1,181 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+.userID {
+  float: right;
+  margin-top: -6vh;
+  margin-right: 1vh;
+  color: white;
+}
+.title {
+  float: left;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+#chart {
+  display: inline-block;
+  vertical-align: center;
+  margin-left: 30vw;
+  margin-right: 30vw;
+  position: relative;
+}
+
+.related {
+  background-color: grey;
+  width: 50vh;
+  margin: auto;
+  font-size: 2rem;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.explain h1 {
+  background-color: grey;
+  font-size: 2rem;
+  font-weight: bold;
+  color: red;
+  width: 50vh;
+  margin: auto;
+}
+.explain h2 {
+  background-color: grey;
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  width: 50vh;
+  margin: auto;
+}
+.login_total_container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.login_container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  /* background-image: url("img/intro.png"); */
+  background-color: #E6E6E6;
+}
+.header {
+  margin: 0px;
+  background-color: #0E151B ;
+  color: white;
+}
+.Login {
+  margin: auto;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.Login {
+  height: 30vh;
+  width: 30vw;
+  border-radius: 1rem;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: #0E151B;
+  position: relative;
+  margin-top: 35vh;
+}
+#button {
+  background-color: #3e77e0;
+  color: white;
+  width: 100px;
+  height: 50px;
+  border-radius: 10%;
+  margin-left: 0.52vh;
+}
+body {
+  height: 100vh;
+}
+#email {
+  margin-bottom: 0.5vh;
+}
+#form {
+  display: table;
+}
+.passr {
+  display: table-row;
+}
+#new {
+  margin-top: 1vh;
+  height: auto;
+  width: auto;
+  color: grey;
+  text-decoration: underline;
+}
+#del {
+  margin-top: 1vh;
+  height: auto;
+  width: auto;
+  color: grey;
+
+  float: right;
+  margin-right: 1vh;
+  font-size: 2rem;
+  margin-top: -0.5vh;
+}
+#new1 {
+  margin-top: 1vh;
+  visibility: collapse;
+}
+
+.popup {
+  position: absolute;
+  width: 50vh;
+  height: 70vh;
+  background-color: #fafafa;
+  margin: auto;
+}
+#form1 {
+  margin: auto;
+}
+.passr2 {
+  margin-left: 5vh;
+  margin-bottom: 10vh;
+}
+.input {
+  margin: auto;
+}
+.sign {
+  margin-top: 5vh;
+  font-size: 2rem;
+  margin-bottom: 7vh;
+}
+
+#root {
+  margin: 0px;
+}
+.banner {
+  background-color: #0E151B;
+  color: white;
+  text-align: center;
+}
+.list td {
+  text-align: center;
+}
+.list {
+  text-align: center;
+}
+.result {
+  text-align: center;
+  font-size: 2rem;
+}

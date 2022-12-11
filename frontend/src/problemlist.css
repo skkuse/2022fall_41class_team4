@@ -1,85 +1,88 @@
 .Search {
-  float: left;
+    float: left;
 }
+
 .problemtable {
-  width: 70vw;
-  float: right;
+    width: 70vw;
+    float: right;
 }
+
 img {
-  width: 2vh;
-  height: 2vh;
-  margin: 2vh;
+    width: 2vh;
+    height: 2vh;
+    margin: 2vh;
 }
+
 .passr {
-  display: flex;
+    display: flex;
 }
 
 .problemlist_container {
-  width: 100vw;
-  height: 100vh;
-  background-color: #E6E6E6;
+    width: 100vw;
+    height: 100vh;
+    background-color: #E6E6E6;
 }
 
 .problemlist_container_inner {
-  height: 80%;
-  margin: 50px;
-  background-color: white;
-  border-radius: 0.8rem;
-  display: flex;
-  flex-direction: row;
+    height: 80%;
+    margin: 50px;
+    background-color: white;
+    border-radius: 0.8rem;
+    display: flex;
+    flex-direction: row;
 }
 
 .problemlist_title {
-  margin-bottom: 10px;
-  font-size: 30px;
-  font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 .problemlist_left_container {
-  padding: 45px;
+    padding: 45px;
 }
 
 .problemlist_right_container {
-  margin-top: 120px;
-  flex-grow: 1;
-  padding-right: 60px;
+    margin-top: 120px;
+    flex-grow: 1;
+    padding-right: 60px;
 }
 
 .problem_name {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 .problem_statistics {
-  display: grid;
-  grid-template-columns: 200px 150px;
-  text-align: left;
-  font-size: 18px;
+    display: grid;
+    grid-template-columns: 200px 150px;
+    text-align: left;
+    font-size: 18px;
 }
 
 .difficulty_veryeasy {
-  color: #55B8F9;
+    color: #55B8F9;
 }
 
 .difficulty_easy {
-  color: #E9AD53;
+    color: #E9AD53;
 }
 
 .difficulty_medium {
-  color: #6EC45D;
+    color: #6EC45D;
 }
 
 .difficulty_hard {
-  color: #ED7335;
+    color: #ED7335;
 }
 
 .difficulty_veryhard {
-  color: #B861DA;
+    color: #B861DA;
 }
 
 .problemlist_element {
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid #D1D1D1;
-  padding-top: 4px;
-  padding-bottom: 4px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #D1D1D1;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }

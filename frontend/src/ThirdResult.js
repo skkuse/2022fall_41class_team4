@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import Chart from "react-apexcharts";
+import React from "react";
+
 class ThirdResult extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        data: this.props.dataParentToChild
+      data: this.props.dataParentToChild
     }
   }
 
@@ -14,7 +14,7 @@ class ThirdResult extends React.Component {
         <div className="FirstTab">
           <div className="result">
             가독성 점수: {this.state.data}
-            </div>
+          </div>
         </div>
       </>
     );

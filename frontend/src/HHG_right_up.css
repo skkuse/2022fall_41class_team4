@@ -12,6 +12,9 @@
     /* justify-content: space-between; */
     padding-left: 11px;
     padding-right: 11px;
+    /* 추가 */
+    justify-content: space-between;
+    width: 600px;
 }
 
 .language_button {
