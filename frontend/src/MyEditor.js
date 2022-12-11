@@ -185,7 +185,7 @@ function MyEditor({ no }) {
     const headers = {
       "Content-type": "application/json",
       Authorization:
-        "Bearer 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",
+        "Bearer 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",
     };
 
     axios
