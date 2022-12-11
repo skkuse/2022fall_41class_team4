@@ -1,0 +1,11 @@
+.testcase {
+  margin-left: 5vw;
+}
+.results {
+  float: right;
+  margin-right: 5vw;
+}
+.left-header {
+  margin-bottom: 5vh;
+  background-color: #a8c860;
+}

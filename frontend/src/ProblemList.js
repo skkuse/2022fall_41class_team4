@@ -14,7 +14,6 @@ class ProblemList extends React.Component {
     search: " ",
   };
   componentDidMount() {
-
     const params = new URLSearchParams(window.location.search);
     var name = params.get("username");
     var id = params.get("id");
@@ -24,7 +23,7 @@ class ProblemList extends React.Component {
     });
   }
   shouldComponentUpdate() {
-    if (this.state.flag && this.state.id != "") {
+    if (this.state.flag && this.state.id !== "") {
       return false;
     }
     return true;
@@ -57,20 +56,15 @@ class ProblemList extends React.Component {
   };
 
   render() {
-    {
-      this.getProblemData();
-    }
+    this.getProblemData();
 
     return (
       <div className="problemlist_container">
         <Header name={this.state.user} />
 
         <div className="problemlist_container_inner">
-
           <div className="problemlist_left_container">
-            <div className="problemlist_title">
-              문제 목록
-            </div>
+            <div className="problemlist_title">문제 목록</div>
             <div className="Search">
               <Form.Group size="lg" controlId="email" class="passr">
                 <Form.Control
@@ -96,10 +90,7 @@ class ProblemList extends React.Component {
               </li>
             </ul>
           </div>
-
-
         </div>
-
       </div>
     );
   }
