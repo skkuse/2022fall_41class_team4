@@ -13,6 +13,8 @@ class Testcase extends Component {
     };
   }
   render() {
+    var i = 1;
+
     return (
       <div>
         <div className="left-header">테스트 케이스</div>
@@ -21,7 +23,7 @@ class Testcase extends Component {
           {this.props.testCases.map((elem) => {
             return (
               <div className="test-block">
-                <div className="test-header">{"테스트 케이스" + elem.id}</div>
+                <div className="test-header">{"테스트 케이스 " + (i++)}</div>
                 <div className="test-inout">
                   <div className="test-input">
                     <div className="input">{elem.testCase_in}</div>
