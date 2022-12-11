@@ -397,6 +397,14 @@ class codeTestAPI(APIView):
                 # save to userProblem db
                 userProblem.save()
                 
+                #calculate solved ratio
+                test_users = UserProblems.objects.filter(problem_id=problem_id).values()
+                passed_users = UserProblems.objects.filter(problem_id=problem_id, user_score=1.0).values() 
+                solved_ratio = len(passed_users) / len(test_users)
+                print(f'test_user = {len(test_users)}, passed_user = {len(passed_users)}, solved_ratio = {solved_ratio}')
+                problem.solved_ratio = solved_ratio
+                problem.save()
+                
                 #generate response
                 response_dict["efficiency_score"] = overall_metric_score
                 response_dict["readability_score"] = "-"+str(len(pylama_error_list))
