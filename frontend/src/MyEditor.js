@@ -5,8 +5,8 @@ import axios from "axios";
 
 import CodeDiff from "react-code-diff-lite";
 import Result from "./Result";
-import StandardOutput from "./StandardOutput";
 import Testcases from "./Testcases";
+import StandardOutput from "./StandardOutput";
 import "./HHG_main.css";
 import "./HHG_problemlist.css";
 import "./HHG_right_down.css";
@@ -52,8 +52,6 @@ function MyEditor({ no }) {
 
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor;
-    localStorage.setItem("key", defaultCode);
-    editorRef.current.getModel().setValue(localStorage.getItem("key"));
 
     // if (localStorage.getItem("key") == null) {
     //   localStorage.setItem("key", defaultCode);
