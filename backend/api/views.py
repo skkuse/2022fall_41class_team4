@@ -398,7 +398,6 @@ class codeTestAPI(APIView):
                 userProblem.save()
                 
                 #generate response
-                response_dict["similarity_with_answer_code"] = 0.0
                 response_dict["efficiency_score"] = overall_metric_score
                 response_dict["readability_score"] = "-"+str(len(pylama_error_list))
                 response_dict["copytest_info"] = copy_detect_result_list[2]
