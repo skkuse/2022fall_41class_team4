@@ -15,9 +15,10 @@ class Tr extends React.Component {
                 {this.props.ProblemData.map((elem) => {
                     var searched = this.props.search;
                     var id = this.props.id;
+                    var name = this.props.name; // 추가
                     console.log(elem.name);
                     console.log(id);
-                    if (elem.name.includes(searched)) return <Td item={elem} id={id} />;
+                    if (elem.name.includes(searched)) return <Td item={elem} id={id} name={name}/>; // 추가
                 })}
             </li>
         );

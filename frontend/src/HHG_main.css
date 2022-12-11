@@ -72,8 +72,9 @@
 
 .common_header_group2 {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     width: 210px;
+    padding-right: 30px;
 }
 
 .common_header_space1 {
@@ -81,7 +82,14 @@
 }
 
 .common_header_space2 {
-    /* width: 300px; */
+    width: 100px;
+}
+
+.user_info {
+    border: 1px solid #A8C860;
+    border-radius: 0.5rem;
+    padding-left: 13px;
+    padding-right: 13px;
 }
 
 

@@ -84,6 +84,7 @@ class ProblemList extends React.Component {
                 ProblemData={this.state.ProblemData}
                 search={this.state.search}
                 id={this.state.id}
+                name={this.state.user} // 추가
               />
               <li>
                 <div className="problemlist_element" />

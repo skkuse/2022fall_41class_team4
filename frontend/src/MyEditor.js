@@ -56,8 +56,7 @@ function MyEditor({ no }) {
       });
   }, []);
 
-
-
+  
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor;
 

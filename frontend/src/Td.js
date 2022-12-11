@@ -7,7 +7,7 @@ class Td extends React.Component {
       <div
         onClick={() => {
           this.props.navigate(
-            "/problems/" + this.props.item.id + "?id=" + this.props.id
+            "/problems/" + this.props.item.id + "?id=" + this.props.id + "&name=" + this.props.name // url 확인
           );
         }}
         className="problemlist_element">
