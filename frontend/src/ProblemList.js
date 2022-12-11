@@ -4,6 +4,7 @@ import Tr from "./Tr";
 import Header from "./Header";
 import Form from "react-bootstrap/Form";
 import "./problemlist.css";
+import CommonHeader_Noinfo from "./CommonHeader_Noinfo"
 
 class ProblemList extends React.Component {
   state = {
@@ -60,7 +61,8 @@ class ProblemList extends React.Component {
 
     return (
       <div className="problemlist_container">
-        <Header name={this.state.user} />
+        {/* <Header name={this.state.user} /> */}
+        <CommonHeader_Noinfo id={this.state.id} username={this.state.user}/>
 
         <div className="problemlist_container_inner">
           <div className="problemlist_left_container">
@@ -84,6 +86,7 @@ class ProblemList extends React.Component {
                 ProblemData={this.state.ProblemData}
                 search={this.state.search}
                 id={this.state.id}
+                username={this.state.user}
               />
               <li>
                 <div className="problemlist_element" />
