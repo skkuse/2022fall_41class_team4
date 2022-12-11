@@ -421,6 +421,83 @@ class codeTestAPI(APIView):
                 return Response(response_dict, status=status.HTTP_400_BAD_REQUEST)
                 print("error")
             
+class consoleTestAPI(APIView):
+    def post(self, request):
+        if request.method == "POST":
+            #init docker client:
+            client = docker.from_env()
+
+            #get user code from post req body
+            reqData = request.data
+            userCode = reqData['user_code']
+            user_id = reqData['user_id']
+            problem_id = reqData['problem_id']
+
+            #make user code py file
+            print("\n\nWorking on " +os.getcwd()+"\n\n")
+            tf = open("./api/userCodeTest/test.py", 'w')
+            tf.write(userCode)
+            tf.close()
+
+
+            #get the problem's testcase
+            problem = Problem.objects.get(id=problem_id)
+            user = get_user_model().objects.get(id=user_id)
+            testCases = testCase.objects.filter(problem=problem)
+            userProblem, created = UserProblems.objects.get_or_create(user=user, problem=problem)   
+
+            #generate unittest code
+            testcase_file = open("./api/userCodeTest/testconsole_run.py", 'w')
+            testcase_init_list = ["import unittest\n","import test\n" "import traceback\n","class solutionTest(unittest.TestCase):\n"]
+            testcase_file.writelines(testcase_init_list)
             
+            testcase_file.write(f"\ttry:\n")
+            testcase_file.write(f"\t\timport test\n")
+            testcase_file.write(f"\texcept Exception as error:\n")
+            testcase_file.write(f"\t\tprint('fail:0')\n")
+            testcase_file.write(f"\t\tprint(error)\n")
+            testcase_file.write(f"\t\texit(1)\n\n")
             
+            testcase_file.write(f"\tdef console_test():\n")
             
+            for i, test_case in enumerate(testCases):
+                testcase_file.write(f"\t\ttry:\n")
+                testcase_file.write(f"\t\t\tprint(test.solution({test_case.testCase_in[1:-1]}))\n")
+                
+                testcase_file.write(f"\t\texcept Exception as error:\n")
+                testcase_file.write(f"\t\t\tprint(error)\n")
+                
+                
+            
+            testcase_close_list = ["if __name__ == '__main__':\n", "\tsolutionTest.console_test()\n"]
+            testcase_file.writelines(testcase_close_list)
+            testcase_file.close()
+            
+
+            #build docker file
+            dockerfile_path='./api/userCodeTest/dockerfile_console'
+            dockerfile_dir = os.path.dirname(dockerfile_path)
+
+            test_docker_img, json_file = client.images.build(path=dockerfile_dir, dockerfile="dockerfile_console")
+
+            
+            response=""
+            response_dict = {}
+            
+            #test result
+            try:
+                response_dict['status']="succeed"
+                response = client.containers.run(test_docker_img,stdout=True,stderr=True, remove=True)
+                response = response.decode('utf-8')
+                responses = response.split('\n')
+                print(f'responses= {responses}')
+                response_dict["stdout"] = response
+                response_dict["stdout_list"] = responses
+                
+                return Response(response_dict, status=status.HTTP_200_OK)
+                        
+            except docker.errors.ContainerError as error:
+                #responses = error.split("\n")
+                #print(responses)
+                response_dict['status']="failed"
+                response_dict['reason']=str(error)
