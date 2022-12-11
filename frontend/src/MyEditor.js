@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 
 import Editor, { useMonaco } from "@monaco-editor/react";
 import axios from "axios";
@@ -12,60 +12,53 @@ import "./HHG_problemlist.css";
 import "./HHG_right_down.css";
 import "./HHG_right_up.css";
 
-// 2번까지는 공개 테스트 케이스, 그 이후는 히든 테스트 케이스
-
-// tabState
-// 1 실행 (stdout)
-// 2 채점
-// 3 제출 (codediff, 각종 점수 ..)
-
 function MyEditor({ no }) {
   const editorRef = useRef(null);
-  var defaultCode = "";
-  var user_id = 0;
-  var preset_id = 1;
-
+  const [userId, setUserId] = useState(0);
+  const [defaultCode, setDefaultCode] = useState("");
+  const [presetId, SetPresetId] = useState(1);
   const [tabState, setTabState] = useState(3);
-
   const [userCode, setUserCode] = useState("");
   const [correctCode, setCorrectCode] = useState("");
-
   const [codeExplain, setCodeExplain] = useState("");
-
   const [userScore, setUserScore] = useState(100);
-
   const [effScore, setEffScore] = useState(100);
   const [readScore, setReadScore] = useState(100);
+  const [stdoutCaseList, setStdoutCaseList] = useState([]);
 
 
   useEffect(() => {
+    setUserId(new URLSearchParams(window.location.search).get("id"));
+
     axios
       .get(`http://146.56.165.145:8000/api/answers/${no}`)
-      .then(function (res3) {
-        user_id = new URLSearchParams(window.location.search).get("id");
-        defaultCode = res3.data.answer_code;
-        defaultCode = defaultCode.substring(0, defaultCode.indexOf('\n'));
+      .then(function (res) {
+        var key = new URLSearchParams(window.location.search).get("id") + no;
 
+        var code = res.data.answer_code;
+        setDefaultCode(code.substring(0, code.indexOf('\n')));
 
-        if (localStorage.getItem(user_id) == null) {
-          localStorage.setItem(user_id, defaultCode);
+        if (localStorage.getItem(key) == null) {
+          localStorage.setItem(key, code.substring(0, code.indexOf('\n')));
         }
       })
-      .catch(function (error3) {
-        console.log(error3);
+      .catch(function (error) {
+        console.log(error);
       });
+ 
   }, []);
 
-  
   function handleEditorDidMount(editor, monaco) {
-    editorRef.current = editor;
+    var key = new URLSearchParams(window.location.search).get("id") + no;
 
-    while (localStorage.getItem(user_id) == null) { }
-    editorRef.current.getModel().setValue(localStorage.getItem(user_id));
+    editorRef.current = editor;
+    editor.getModel().setValue(localStorage.getItem(key));
   }
 
   function handleEdiorChange(value, event) {
-    localStorage.setItem(user_id, value);
+    var key = new URLSearchParams(window.location.search).get("id") + no;
+
+    localStorage.setItem(key, value);
   }
 
   function submit() {
@@ -73,7 +66,7 @@ function MyEditor({ no }) {
 
     axios
       .post("http://146.56.165.145:8000/api/testcase/test/", {
-        user_id: user_id,
+        user_id: userId,
         problem_id: no,
         user_code: editorRef.current.getValue(),
       })
@@ -109,10 +102,6 @@ function MyEditor({ no }) {
                 setUserCode(editorRef.current.getValue());
                 setCorrectCode(res3.data.answer_code);
                 setTabState(3);
-
-                console.log(userScore);
-                console.log(effScore);
-                console.log(readScore);
               })
               .catch(function (error3) {
                 console.log(error3);
@@ -151,19 +140,22 @@ function MyEditor({ no }) {
   }
 
   function codeInit() {
+    // while (defaultCode == "") { }
     editorRef.current.getModel().setValue(defaultCode);
+    var key = userId * 10000 + no;
+    localStorage.setItem(key, defaultCode);
+
     alert("기본 코드로 초기화되었습니다.");
   }
 
   function testCode() {
     axios
       .post("http://146.56.165.145:8000/api/testcase/test/", {
-        user_id: user_id,
+        user_id: userId,
         problem_id: no,
         user_code: editorRef.current.getValue(),
       })
       .then(function (res) {
-        console.log(res.data);
         setTabState(2);
       })
       .catch(function (error) {
@@ -173,11 +165,10 @@ function MyEditor({ no }) {
 
   function codeLoad() {
     axios
-      .get(`http://146.56.165.145:8000/api/preset/${user_id}/${no}/${preset_id}`)
+      .get(`http://146.56.165.145:8000/api/preset/${userId}/${no}/${presetId}`)
       .then(function (res) {
-        console.log(res.data);
         editorRef.current.getModel().setValue(res.data.code);
-        alert(`${preset_id}번 영역 코드를 불러왔습니다.`);
+        alert(`${presetId}번 영역 코드를 불러왔습니다.`);
       })
       .catch(function (error) {
         console.log(error);
@@ -187,14 +178,13 @@ function MyEditor({ no }) {
   function codeSave() {
     axios
       .post(`http://146.56.165.145:8000/api/preset`, {
-        user_id: user_id,
+        user_id: userId,
         problem_id: no,
         user_code: editorRef.current.getValue(),
-        preset_number: preset_id,
+        preset_number: presetId,
       })
       .then(function (res) {
-        console.log(res.data);
-        alert(`${preset_id}번 영역에 코드를 저장했습니다.`);
+        alert(`${presetId}번 영역에 코드를 저장했습니다.`);
       })
       .catch(function (error) {
         console.log(error);
@@ -202,35 +192,58 @@ function MyEditor({ no }) {
   }
 
   function execute() {
-    const headers = {
-      "Content-type": "application/json",
-      Authorization:
-        "Bearer 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",
-    };
+    alert("코드를 실행하고 표준 출력을 보여줍니다.");
+
+    console.log(userId);
 
     axios
-      .post(
-        "https://api.openai.com/v1/completions",
-        {
-          model: "code-davinci-002",
-          prompt: editorRef.current.getValue(),
-          temperature: 0,
-          max_tokens: 64,
-          top_p: 1.0,
-          frequency_penalty: 0.0,
-          presence_penalty: 0.0,
-        },
-        { headers }
-      )
+      .post(`http://146.56.165.145:8000/api/testcase/consoletest/`, {
+        user_id: userId,
+        problem_id: no,
+        user_code: editorRef.current.getValue(),
+      })
       .then(function (res) {
-        console.log(res.data);
-        console.log(res.data.choices[0].text);
-        setCodeExplain(res.data.choices[0].text);
-        setTabState(3);
+        var tempList = res.data.stdout_list;
+        var len = tempList.length;
+        var realList = [];
+        for (var i = 0; i < len; i += 2) {
+          realList.push(tempList[i]);
+        }
+        setStdoutCaseList(realList);
       })
       .catch(function (error) {
         console.log(error);
       });
+
+    // const headers = {
+    //   "Content-type": "application/json",
+    //   Authorization:
+    //     "Bearer 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",
+    // };
+
+    // axios
+    //   .post(
+    //     "https://api.openai.com/v1/completions",
+    //     {
+    //       model: "code-davinci-002",
+    //       prompt: editorRef.current.getValue(),
+    //       temperature: 0,
+    //       max_tokens: 64,
+    //       top_p: 1.0,
+    //       frequency_penalty: 0.0,
+    //       presence_penalty: 0.0,
+    //     },
+    //     { headers }
+    //   )
+    //   .then(function (res) {
+    //     console.log(res.data);
+    //     console.log(res.data.choices[0].text);
+    //     setCodeExplain(res.data.choices[0].text);
+    //     setTabState(3);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
 
     // const headers = {
     //     'Content-type': 'application/json',
@@ -257,7 +270,7 @@ function MyEditor({ no }) {
     // }
     // );
 
-    alert("준비 중입니다.");
+    // alert("준비 중입니다.");
   }
 
   // 1 실행
