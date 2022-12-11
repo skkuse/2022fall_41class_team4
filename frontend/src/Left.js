@@ -16,8 +16,17 @@ import "./HHG_main.css";
 import "./HHG_problemlist.css";
 import "./HHG_right_down.css";
 import "./HHG_right_up.css";
+// import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Left() {
+  const navigate = useNavigate();
+  const navigate_home= ()=>{
+    alert();
+    navigate("/problemlist");
+
+  }
+
   const [state, setState] = useState({
     problemInfo: {},
     testCases: [],
@@ -48,9 +57,9 @@ function Left() {
   return (
     <div>
       <div className="common_header_login">
-        <div className="home_button">
+        <div className="home_button" onclick={navigate_home} style={{cursur:'pointer'}}>
           <img className="skku" alt="skku" src={skku_icon} />
-          <div>코딩테스트 연습</div>
+          <div style={{width:"200px"}}>코딩테스트 연습</div>
         </div>
         <div className="common_header_space1" />
         <div className="common_header_group1">
@@ -76,7 +85,7 @@ function Left() {
         style={{ position: "relative", overflow: "hidden" }}
       >
         <Pane
-          style={{ height: "50vh", overflowY: "scroll", overflowX: "hidden" }}
+          style={{ height: "100%", overflowY: "scroll", overflowX: "hidden" }}
         >
           <Statement
             description={state.problemInfo.description}
@@ -89,8 +98,12 @@ function Left() {
           <MyEditor no={no} />
         </Pane>
       </SplitPane>
+      <div style={{background:"black", width:"100%", height:"40px"}}>hi</div>
     </div>
+
   );
 }
+
+
 
 export default Left;

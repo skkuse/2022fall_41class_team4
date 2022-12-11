@@ -69,6 +69,7 @@ class Popup extends React.Component {
               placeholder="Email"
               autoFocus
               type="text"
+              style={{color:'black'}}
               onChange={(e) => this.handleChange2(e)}
             />
           </Form.Group>
@@ -79,6 +80,7 @@ class Popup extends React.Component {
               placeholder="Username"
               autoFocus
               type="text"
+              style={{color:'black'}}
               onChange={(e) => this.handleChange1(e)}
             />
           </Form.Group>
@@ -89,6 +91,7 @@ class Popup extends React.Component {
               placeholder="Password"
               type="password"
               onChange={(e) => this.handleChange(e)}
+              style={{color:'black',cursor:'pointer'}}
             />
           </Form.Group>
           <Button
@@ -96,6 +99,7 @@ class Popup extends React.Component {
             block
             size="lg"
             onClick={() => this.handleClick1()}
+            style={{margin:'auto'}}
           >
             New Account
           </Button>

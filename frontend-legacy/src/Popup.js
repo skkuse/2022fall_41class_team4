@@ -96,6 +96,7 @@ class Popup extends React.Component {
             block
             size="lg"
             onClick={() => this.handleClick1()}
+
           >
             New Account
           </Button>

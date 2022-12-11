@@ -5,8 +5,8 @@ class Testcase extends Component {
 
 
         return (
-            <div>
-                <div className="left-header">
+            <div style={{height:"50%"}}>
+                <div className="left-header" style={{fontSize:"25px", padding:"5px 10px"}}>
                     테스트 케이스
                 </div>
 

@@ -74,7 +74,7 @@ class ProblemList extends React.Component {
             <div className="Search">
               <Form.Group size="lg" controlId="email" class="passr">
                 <Form.Control
-                  class="input"
+                  // class="search"
                   placeholder="search"
                   autoFocus
                   type="text"

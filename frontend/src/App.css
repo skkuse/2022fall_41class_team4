@@ -121,11 +121,14 @@
   color: white;
   /*width: 100px;*/
   /*height: 50px;*/
+  max-width:170px;
   border-radius: 10px;
   padding: 17px 24px;
   margin-left: 0.52vh;
   margin-left:5px;
   margin-top:6px;
+  /*margin:auto;*/
+
 }
 
 body {
@@ -141,7 +144,7 @@ body {
 }
 #password{
   padding-left:3px;
-  border-bottom: 1px solid white;
+  border-bottom: 2px solid #D9D9D9;
   background:none;
   color:white;
 }
@@ -196,11 +199,13 @@ body {
 
 #form1 {
   margin: auto;
+  display:flex;
+  flex-direction: column;
 }
 
 .passr2 {
   margin-left: 5vh;
-  margin-bottom: 10vh;
+  margin-bottom: 20px;
 }
 
 .input {
