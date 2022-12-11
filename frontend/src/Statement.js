@@ -6,7 +6,7 @@ class Statement extends Component {
 
         return (
             <div className="mystatement">
-                <div className="left-header">
+                <div className="left-header-old">
                     문제 설명
                 </div>
                 <div className="left-content">

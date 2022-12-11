@@ -17,7 +17,7 @@ class Testcase extends Component {
 
     return (
       <div>
-        <div className="left-header">테스트 케이스</div>
+        <div className="left-header-old">테스트 케이스</div>
 
         <div>
           {this.props.testCases.map((elem) => {
