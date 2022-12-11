@@ -5,7 +5,7 @@ import axios from "axios";
 
 import CodeDiff from "react-code-diff-lite";
 import Result from "./Result";
-
+import StandardOutput from "./StandardOutput";
 import "./HHG_main.css";
 import "./HHG_problemlist.css";
 import "./HHG_right_down.css";
@@ -304,36 +304,69 @@ function MyEditor({ no }) {
         onMount={handleEditorDidMount}
         onChange={handleEdiorChange}
       />
-
-      {
-        <>
-          {tabState == 1 ? <></> : <></>}
-
-          {tabState == 2 ? <>총점: 60점</> : <></>}
-
-          {tabState == 3 ? (
+      <div className="bigtabs">
+        <ul className="nav">
+          <li
+            className={{ tabState } === 1 ? "active" : ""}
+            onClick={() => {
+              setTabState(1);
+            }}
+          >
+            실행
+          </li>
+          <li
+            className={{ tabState } === 2 ? "active" : ""}
+            onClick={() => {
+              setTabState(2);
+            }}
+          >
+            실행결과
+          </li>
+          <li
+            className={{ tabState } === 3 ? "active" : ""}
+            onClick={() => {
+              setTabState(3);
+            }}
+          >
+            점수
+          </li>
+        </ul>
+        <div className="realout">
+          {
             <>
-              <CodeDiff oldStr={userCode} newStr={correctCode} context={10} />
-              <div className="con">
-                <Result
-                  score1={userScore}
-                  score2={effScore}
-                  score3={readScore}
-                />
-              </div>
+              {tabState === 1 ? <StandardOutput /> : <></>}
 
-              <div>
-                코드 설명
-                {codeExplain}
-              </div>
+              {tabState === 2 ? <>총점: 60점</> : <></>}
 
-              <div>관련 자료</div>
+              {tabState === 3 ? (
+                <>
+                  <CodeDiff
+                    oldStr={userCode}
+                    newStr={correctCode}
+                    context={10}
+                  />
+                  <div className="con">
+                    <Result
+                      score1={userScore}
+                      score2={effScore}
+                      score3={readScore}
+                    />
+                  </div>
+
+                  <div>
+                    코드 설명
+                    {codeExplain}
+                  </div>
+
+                  <div>관련 자료</div>
+                </>
+              ) : (
+                <></>
+              )}
             </>
-          ) : (
-            <></>
-          )}
-        </>
-      }
+          }
+        </div>
+      </div>
     </>
   );
 }
