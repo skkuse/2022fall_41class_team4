@@ -45,6 +45,12 @@ class Login extends React.Component {
         var newurl = "/Problemlist?id=" + id + "&username=" + user;
         console.log(response);
         window.location.replace(newurl);
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.status);
+          alert("Login Failure");
+        }
       });
   }
 
