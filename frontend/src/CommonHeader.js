@@ -19,7 +19,7 @@ class CommonHeader extends React.Component {
             {/* <div className="lecture_info">
                             과목명: 소프트웨어공학개론(SWE3002_41)
                         </div> */}
-            <div className="problem_info">두 개 뽑아서 더하기</div>
+            <div className="problem_info">{this.props.problem}</div>
             </div>
             <div className="common_header_space2" />
             <div className="common_header_group2">

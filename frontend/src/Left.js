@@ -49,7 +49,7 @@ function Left() {
 
   return (
     <div className="left_content">
-      <CommonHeader id={new URLSearchParams(window.location.search).get("id")} username={new URLSearchParams(window.location.search).get("username")}/>
+      <CommonHeader problem={state.problemInfo.name} id={new URLSearchParams(window.location.search).get("id")} username={new URLSearchParams(window.location.search).get("username")}/>
       <SplitPane
         split="vertical"
         minSize={300}
