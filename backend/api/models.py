@@ -44,16 +44,6 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
     
-    # python manage.py createsuperuser 사용 시 해당 함수가 사용됨
-    # def create_superuser(self, email, username, password):
-    #     user = self.create_user(
-    #         email=email,
-    #         username=username,
-    #         password=password
-    #     )
-    #     user.is_admin = True
-    #     user.save(using=self._db)
-    #     return user    
     def create_superuser(self, email, password, **kwargs):         
         user = self.model(email=email, is_staff=True, is_superuser=True, **kwargs)         
         user.set_password(password)         
@@ -92,7 +82,4 @@ class Preset(models.Model):
     problem = models.ForeignKey('Problem', related_name='Preset', on_delete=models.CASCADE)
     code = models.TextField(default=st)
     preset_number= models.IntegerField(default=0)
-    # preset1 = models.TextField()
-    # preset2 = models.TextField()
-    # preset3 = models.TextField()
-    # last_code = models.TextField()
+

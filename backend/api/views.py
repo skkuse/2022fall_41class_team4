@@ -16,11 +16,6 @@ import json
 import subprocess
 import pycode_similar
 
-
-# todo: 에러코드 구체화
-# todo: try catch 예외처리
-# todo: CustomUser 바꾸기
-
 class AnswerListAPI(APIView):
 
     # 문제 답안 등록
@@ -215,13 +210,7 @@ class UserRegisterAPI(APIView):
         if user:
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(reqData, status=status.HTTP_400_BAD_REQUEST)
-        # serializer = UsersSerializer(data=reqData)
-        # if serializer.is_valid():
-        #     serializer.save()
-        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
+    
 class loginAPI(APIView):
     # 사용자 로그인
     def post(self, request):
@@ -235,22 +224,6 @@ class loginAPI(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(f"login failed", status=status.HTTP_400_BAD_REQUEST)
     
-
-
-#
-# @api_view(['POST'])
-# def loginAPI(request):
-#     if request.method == "POST":
-#         reqData = request.data
-#         email = reqData['email'] #request.POST.get('email') #['email']
-#         #print(f'user email = {email}')
-#         password = reqData['password']
-#         user = authenticate(request, username=email, password=password)
-#         serializer = UsersSerializer(user)
-#         if user :
-#             return Response(serializer.data, status=status.HTTP_200_OK)
-#         return Response(f"login failed", status=status.HTTP_400_BAD_REQUEST)
-
 #@api_view(['POST'])
 class codeTestAPI(APIView):
     def post(self, request):
@@ -344,10 +317,6 @@ class codeTestAPI(APIView):
                         fail_num = res.split(":")[1]
                         fail_reason = responses[i+1]
                         
-                        # fail_split = res.split(" ")
-                        # fail_num = fail_split[0].split(":")[1]
-                        # fail_reason = fail_split[1].split(":")[1]
-                        
                         temp["fail_testcase_num"] = fail_num
                         temp["fail_reasons"] = fail_reason
                         response_dict["fails"].append(temp)
@@ -355,10 +324,6 @@ class codeTestAPI(APIView):
                         temp = {}
                         success_num = res.split(":")[1]
                         usr_output = responses[i+1]
-                        
-                        # fail_split = res.split(" ")
-                        # fail_num = fail_split[0].split(":")[1]
-                        # fail_reason = fail_split[1].split(":")[1]
                         
                         temp["success_testcase_num"] = success_num
                         temp["user_output"] = usr_output
@@ -380,7 +345,6 @@ class codeTestAPI(APIView):
                 #copy detect
                 #ref from https://pypi.org/project/pycode-similar/
                 exit_code, copy_detect_result = subprocess.getstatusoutput(f"pycode_similar {os.getcwd()}/api/userCodeTest/test.py {os.getcwd()}/api/userCodeTest/answer.py")
-                #copy_detect_result = pycode_similar.detect([os.getcwd()+"/api/userCodeTest/test.py", os.getcwd()+"/api/userCodeTest/answer.py"], diff_method=pycode_similar.UnifiedDiff, keep_prints=False, module_level=False)
                 
                 copy_detect_result_list = copy_detect_result.split("\n")
                 print(f'copy_detect_result = {copy_detect_result_list}, type={type(copy_detect_result_list)}')
@@ -406,8 +370,6 @@ class codeTestAPI(APIView):
                 return Response(response_dict, status=status.HTTP_200_OK)
                         
             except docker.errors.ContainerError as error:
-                #responses = error.split("\n")
-                #print(responses)
                 response_dict['status']="failed"
                 response_dict['reason']=str(error)
                 print(error)
@@ -490,7 +452,5 @@ class consoleTestAPI(APIView):
                 return Response(response_dict, status=status.HTTP_200_OK)
                         
             except docker.errors.ContainerError as error:
-                #responses = error.split("\n")
-                #print(responses)
                 response_dict['status']="failed"
                 response_dict['reason']=str(error)
