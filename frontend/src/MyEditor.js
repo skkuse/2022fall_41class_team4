@@ -327,7 +327,7 @@ function MyEditor({ no }) {
               setTabState(1);
             }}
           >
-            실행
+            Standard Output
           </li>
           <li
             className={{ tabState } === 2 ? "active" : ""}
