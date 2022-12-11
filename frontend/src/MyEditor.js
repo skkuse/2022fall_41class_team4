@@ -26,6 +26,7 @@ function MyEditor({ no }) {
   const [readScore, setReadScore] = useState(100);
   const [stdoutCaseList, setStdoutCaseList] = useState([]);
   const [testCaseList, setTestCaseList] = useState([]);
+  const [refLink, setRefLink] = useState([]);
 
 
   useEffect(() => {
@@ -76,7 +77,7 @@ function MyEditor({ no }) {
         const headers = {
           "Content-type": "application/json",
           Authorization:
-            "Bearer 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",
+            "Bearer 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",
         };
 
         axios
@@ -97,13 +98,27 @@ function MyEditor({ no }) {
             axios
               .get(`http://146.56.165.145:8000/api/answers/${no}`)
               .then(function (res3) {
-                setUserScore(res.data.userProblemData.user_score);
-                setEffScore(res.data.efficiency_score);
-                setReadScore(100 + 10 * parseInt(res.data.readability_score));
-                setCodeExplain(res2.data.choices[0].text);
-                setUserCode(editorRef.current.getValue());
-                setCorrectCode(res3.data.answer_code);
-                setTabState(3);
+
+                axios
+                  .get(`http://146.56.165.145:8000/api/problem/${no}`)
+                  .then(function (res4) {
+                    var str = res4.data.reference.substring(1, res4.data.reference.length - 1);
+                    var strSplit = str.split(',');
+                    setRefLink(strSplit);
+                    setUserScore(parseInt(res.data.userProblemData.user_score * 100));
+                    setEffScore(res.data.efficiency_score);
+                    setReadScore(100 + 10 * parseInt(res.data.readability_score));
+                    setCodeExplain(res2.data.choices[0].text);
+                    setUserCode(editorRef.current.getValue());
+                    setCorrectCode(res3.data.answer_code);
+                    setTabState(3);
+                  })
+                  .catch(function (error4) {
+                    console.log(error4);
+                  });
+
+
+
               })
               .catch(function (error3) {
                 console.log(error3);
@@ -416,10 +431,27 @@ function MyEditor({ no }) {
 
                   <div>
                     코드 설명
+                    <br />
                     {codeExplain}
+                    <br />
+                    <br />
                   </div>
 
-                  <div>관련 자료</div>
+                  <div>
+                    관련 자료
+                    <br />
+                    {
+                      refLink.map((elem) => {
+                        return (
+                          <>
+                            <a href={elem}>{elem}</a>
+                            <br />
+                          </>
+                        )
+                      })
+
+                    }
+                  </div>
                 </>
               ) : (
                 <></>
