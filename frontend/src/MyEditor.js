@@ -5,7 +5,7 @@ import axios from "axios";
 
 import CodeDiff from "react-code-diff-lite";
 import Result from "./Result";
-import StandardOutput from "./StandardOutput";
+
 import "./HHG_main.css";
 import "./HHG_problemlist.css";
 import "./HHG_right_down.css";
@@ -44,6 +44,11 @@ function MyEditor({ no }) {
         user_id = new URLSearchParams(window.location.search).get("id");
         defaultCode = res3.data.answer_code;
         defaultCode = defaultCode.substring(0, defaultCode.indexOf('\n'));
+
+
+        if (localStorage.getItem(user_id) == null) {
+          localStorage.setItem(user_id, defaultCode);
+        }
       })
       .catch(function (error3) {
         console.log(error3);
@@ -51,17 +56,12 @@ function MyEditor({ no }) {
   }, []);
 
 
+
   function handleEditorDidMount(editor, monaco) {
     editorRef.current = editor;
-    localStorage.setItem("key", defaultCode);
-    editorRef.current.getModel().setValue(localStorage.getItem("key"));
 
-
-
-    // if (localStorage.getItem("key") == null) {
-    //   localStorage.setItem("key", defaultCode);
-    // }
-    // editorRef.current.getModel().setValue(localStorage.getItem("key"));
+    while (localStorage.getItem(user_id) == null) { }
+    editorRef.current.getModel().setValue(localStorage.getItem(user_id));
   }
 
   function handleEdiorChange(value, event) {
