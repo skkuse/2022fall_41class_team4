@@ -5,7 +5,7 @@ class Statement extends Component {
         console.log(this.props.description);
 
         return (
-            <div>
+            <div className="mystatement">
                 <div className="left-header">
                     문제 설명
                 </div>

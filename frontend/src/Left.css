@@ -115,3 +115,39 @@
     color: red;
     padding-left: 25px;
 }
+
+.mysplit {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.myeditor_content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.mysplit2 {
+    height: 100%;
+    border-left: 1px solid #3a405040;
+}
+
+.mystatement {
+    flex-grow: 1;
+}
+
+.left_content {
+    height: 100vh;
+    width: 100wh;
+    display: flex;
+    flex-direction: column;
+}
+
+.result_section {
+    overflow: scroll;
+    flex-grow: 1;
+    background-color: #E6E6E6;
+}

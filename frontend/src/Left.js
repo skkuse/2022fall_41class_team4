@@ -46,7 +46,7 @@ function Left() {
   }, []);
 
   return (
-    <div>
+    <div className="left_content">
       <div className="common_header_login">
         <div className="home_button">
           <img className="skku" alt="skku" src={skku_icon} />
@@ -72,11 +72,13 @@ function Left() {
       <SplitPane
         split="vertical"
         minSize={300}
-        defaultSize={700}
+        defaultSize={"45%"}
         style={{ position: "relative", overflow: "hidden" }}
       >
         <Pane
-          style={{ height: "50vh", overflowY: "scroll", overflowX: "hidden" }}
+          // style={{ height: "50vh", overflowY: "scroll", overflowX: "hidden" }}
+          style={{ overflowY: "scroll", overflowX: "hidden" }}
+          className="mysplit"
         >
           <Statement
             description={state.problemInfo.description}
@@ -85,7 +87,7 @@ function Left() {
           <Testcase testCases={state.testCases} />
         </Pane>
 
-        <Pane>
+        <Pane className="mysplit2">
           <MyEditor no={no} />
         </Pane>
       </SplitPane>

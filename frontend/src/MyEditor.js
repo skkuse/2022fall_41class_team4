@@ -266,7 +266,7 @@ function MyEditor({ no }) {
   // 3 결과
 
   return (
-    <>
+    <div className="myeditor_content">
       <div className="up_buttonlist">
         <button className="blue_button" onClick={codeInit}>
           초기화
@@ -388,7 +388,7 @@ function MyEditor({ no }) {
           }
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
