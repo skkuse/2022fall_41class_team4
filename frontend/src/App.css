@@ -16,6 +16,7 @@
 
 .title {
   float: left;
+  cursor:pointer;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -72,6 +73,15 @@
   flex-direction: column;
 }
 
+.username{
+  border: 1px solid white;
+  border-radius: 11px;
+  /*border-bottom:1px solid white;*/
+  margin-right:40px;
+  font-size: 12px;
+  padding: 3px 15px;
+}
+
 .login_container {
   flex-grow: 1;
   display: flex;
@@ -109,19 +119,33 @@
 #button {
   background-color: #3e77e0;
   color: white;
-  width: 100px;
-  height: 50px;
-  border-radius: 10%;
+  /*width: 100px;*/
+  /*height: 50px;*/
+  border-radius: 10px;
+  padding: 17px 24px;
   margin-left: 0.52vh;
+  margin-left:5px;
+  margin-top:6px;
 }
 
 body {
   height: 100vh;
 }
 
-#email {
+#email{
   margin-bottom: 0.5vh;
+  padding-left:3px;
+  background:none;
+  border-bottom: 1px solid white;
+  color:white;
 }
+#password{
+  padding-left:3px;
+  border-bottom: 1px solid white;
+  background:none;
+  color:white;
+}
+
 
 #form {
   display: table;
@@ -129,6 +153,12 @@ body {
 
 .passr {
   display: table-row;
+  margin:5px;
+  border-radius:5px;
+}
+
+.passwr > input{
+  padding-left:5px;
 }
 
 #new {
