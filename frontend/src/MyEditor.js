@@ -67,6 +67,8 @@ function MyEditor({ no }) {
   function submit() {
     alert("코드가 제출되었습니다. 결과를 로딩합니다.");
 
+    const apikey = "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";
+
     axios
       .post("http://146.56.165.145:8000/api/testcase/test/", {
         user_id: userId,
@@ -77,7 +79,7 @@ function MyEditor({ no }) {
         const headers = {
           "Content-type": "application/json",
           Authorization:
-            "Bearer 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",
+            "Bearer " + apikey,
         };
 
         axios
