@@ -182,13 +182,11 @@ function MyEditor({ no }) {
   }
 
   function execute() {
-
     const headers = {
       "Content-type": "application/json",
       Authorization:
         "Bearer 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",
     };
-
 
     axios
       .post(
@@ -203,15 +201,16 @@ function MyEditor({ no }) {
           presence_penalty: 0.0,
         },
         { headers }
-      ).then(function (res) {
+      )
+      .then(function (res) {
         console.log(res.data);
         console.log(res.data.choices[0].text);
         setCodeExplain(res.data.choices[0].text);
         setTabState(3);
-      }).catch(function (error) {
-        console.log(error);
       })
-
+      .catch(function (error) {
+        console.log(error);
+      });
 
     // const headers = {
     //     'Content-type': 'application/json',
@@ -299,7 +298,7 @@ function MyEditor({ no }) {
         </button>
       </div>
       <Editor
-        height="10vh"
+        height="35vh"
         defaultLanguage="python"
         defaultValue={userCode}
         onMount={handleEditorDidMount}

@@ -3,7 +3,7 @@ import Chart from "react-apexcharts";
 import SecondResult from "./SecondResult";
 import FirstResult from "./FirstResult";
 import ThirdResult from "./ThirdResult";
-import "./Result.css"
+import "./Result.css";
 class Result extends React.Component {
   constructor(props) {
     super(props);
@@ -17,11 +17,7 @@ class Result extends React.Component {
         chart: {
           type: "donut",
         },
-        labels: [
-          "기능 점수",
-          "효율성 점수",
-          "가독성 점수",
-        ],
+        labels: ["기능 점수", "효율성 점수", "가독성 점수"],
         responsive: [
           {
             breakpoint: 480,
@@ -57,10 +53,7 @@ class Result extends React.Component {
     });
   };
 
-
   render() {
-
-
     return (
       <>
         <div id="chart">
@@ -68,8 +61,8 @@ class Result extends React.Component {
             options={this.state.options}
             series={[this.props.score1, this.props.score2, this.props.score3]}
             type="donut"
-            height={200}
-            width={400}
+            height={150}
+            width={300}
           />
         </div>
         <div className="Tabs">

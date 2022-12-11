@@ -1,7 +1,7 @@
 .Tabs {
   width: 30vw;
-  height: 5vh;
-  min-height: 400px;
+  height: 15vh;
+
   background: #a8c860;
   margin-left: 10vw;
   font-size: 0.7rem;
@@ -17,7 +17,7 @@
 #chart {
   display: inline-block;
   vertical-align: center;
-  margin-left: 5vw;
+  margin-left: 8vw;
   position: relative;
 }
 
@@ -65,5 +65,4 @@ ul.nav li.active {
 .result {
   text-align: center;
   font-size: 2rem;
-  margin-top: 15vh;
 }
