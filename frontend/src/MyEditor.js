@@ -25,6 +25,7 @@ function MyEditor({ no }) {
   const [effScore, setEffScore] = useState(100);
   const [readScore, setReadScore] = useState(100);
   const [stdoutCaseList, setStdoutCaseList] = useState([]);
+  const [testCaseList, setTestCaseList] = useState([]);
 
 
   useEffect(() => {
@@ -160,6 +161,22 @@ function MyEditor({ no }) {
       })
       .then(function (res) {
         console.log(res.data);
+
+        const checkList = new Array((res.data.fails.length + res.data.success.length));
+
+        for (var i = 0; i < res.data.fails.length; i++) {
+          var tcnum = res.data.fails[i]['fail_testcase_num'];
+
+          checkList[tcnum] = [0, res.data.fails[i]['fail_reasons']];
+        }
+
+        for (var i = 0; i < res.data.success.length; i++) {
+          var tcnum = res.data.success[i]['success_testcase_num'];
+
+          checkList[tcnum] = [1, res.data.success[i]['user_output']];
+        }
+
+        setTestCaseList(checkList);
         setTabState(2);
       })
       .catch(function (error) {
@@ -196,7 +213,7 @@ function MyEditor({ no }) {
   }
 
   function execute() {
-    alert("코드를 실행하고 표준 출력을 보여줍니다.");
+    alert("각 테스트케이스에 대하여 표준 출력을 보여줍니다.");
 
     console.log(userId);
 
@@ -314,25 +331,25 @@ function MyEditor({ no }) {
           <button className="blue_button" onClick={codeInit}>
             초기화
           </button>
-          <button className="blue_button" onClick={importData}>
-            파일 업로드
+          <button className="blue_button" onClick={codeSave}>
+            저장
+          </button>
+          <button className="blue_button" onClick={execute}>
+            실행
+          </button>
+        </div>
+        <div className="button_group_3">
+          <button className="blue_button" onClick={codeLoad}>
+            불러오기
           </button>
           <button className="blue_button" onClick={copyCode}>
             복사
           </button>
-        </div>
-        <div className="button_group_3">
-        <button className="blue_button" onClick={codeSave}>
-            저장
-          </button>
-          <button className="blue_button" onClick={codeLoad}>
-            불러오기
+          <button className="blue_button" onClick={importData}>
+            파일 업로드
           </button>
         </div>
         <div className="button_group_4">
-        <button className="blue_button" onClick={execute}>
-            실행
-          </button>
           <button className="blue_button" onClick={testCode}>
             채점
           </button>
@@ -380,7 +397,7 @@ function MyEditor({ no }) {
             <>
               {tabState === 1 ? <StandardOutput stdoutCaseList={stdoutCaseList} /> : <></>}
 
-              {tabState === 2 ? <Testcases /> : <></>}
+              {tabState === 2 ? <Testcases testCaseList={testCaseList} /> : <></>}
 
               {tabState === 3 ? (
                 <>
