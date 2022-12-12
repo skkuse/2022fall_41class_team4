@@ -67,7 +67,7 @@ function MyEditor({ no }) {
   function submit() {
     alert("코드가 제출되었습니다. 결과를 로딩합니다.");
 
-    const apikey = "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";
+    const apikey = "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";
 
     axios
       .post("http://146.56.165.145:8000/api/testcase/test/", {
