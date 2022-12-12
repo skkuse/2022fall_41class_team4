@@ -13,15 +13,16 @@ urlpatterns = [
    path('answers', AnswerListAPI.as_view()),
    path('answers/<int:problem_id>', AnswerAPI.as_view()),
 
-
    path('testcase', TestCaseListAPI.as_view()),
    path('testcase/<int:problem_id>', TestCaseAPI.as_view()),
+   path('testcase/patch/<int:testcase_id>', TestCaseAPI.as_view()),
+   path('testcase/test/', codeTestAPI.as_view()),
+   path('testcase/consoletest/', consoleTestAPI.as_view()),
 
    path('preset', PresetListAPI.as_view()),
    path('preset/<int:user_id>/<int:problem_id>/<int:preset_number>', PresetAPI.as_view()),
 
    path('login/', loginAPI.as_view()),
-   path('testcase/test/', codeTestAPI.as_view())
-   # path('testcase/test', ExecuteTestCaseAPI.as_view()),
+   
 
 ]

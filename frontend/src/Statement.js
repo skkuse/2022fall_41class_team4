@@ -5,8 +5,8 @@ class Statement extends Component {
         console.log(this.props.description);
 
         return (
-            <div style={{height:"50%"}}>
-                <div className="left-header" style={{fontSize:"25px", padding:"5px 10px"}}>
+            <div className="mystatement">
+                <div className="left-header-old">
                     문제 설명
                 </div>
                 <div className="left-content">

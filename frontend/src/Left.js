@@ -16,17 +16,10 @@ import "./HHG_main.css";
 import "./HHG_problemlist.css";
 import "./HHG_right_down.css";
 import "./HHG_right_up.css";
-// import React from "react";
-import { useNavigate } from "react-router-dom";
+
+import CommonHeader from "./CommonHeader";
 
 function Left() {
-  const navigate = useNavigate();
-  const navigate_home= ()=>{
-    alert();
-    navigate("/problemlist");
-
-  }
-
   const [state, setState] = useState({
     problemInfo: {},
     testCases: [],
@@ -55,37 +48,18 @@ function Left() {
   }, []);
 
   return (
-    <div>
-      <div className="common_header_login">
-        <div className="home_button" onclick={navigate_home} style={{cursur:'pointer'}}>
-          <img className="skku" alt="skku" src={skku_icon} />
-          <div style={{width:"200px"}}>코딩테스트 연습</div>
-        </div>
-        <div className="common_header_space1" />
-        <div className="common_header_group1">
-          {/* <div className="lecture_info">
-                        과목명: 소프트웨어공학개론(SWE3002_41)
-                    </div> */}
-          <div className="problem_info">두 개 뽑아서 더하기</div>
-        </div>
-        <div className="common_header_space2" />
-        <div className="common_header_group2">
-          {/* <div className="student_id">
-                        2022000000
-                    </div>
-                    <div className="logout">
-                        Log Out
-                    </div> */}
-        </div>
-      </div>
+    <div className="left_content">
+      <CommonHeader problem={state.problemInfo.name} id={new URLSearchParams(window.location.search).get("id")} username={new URLSearchParams(window.location.search).get("username")}/>
       <SplitPane
         split="vertical"
         minSize={300}
-        defaultSize={700}
+        defaultSize={"45%"}
         style={{ position: "relative", overflow: "hidden" }}
       >
         <Pane
-          style={{ height: "100%", overflowY: "scroll", overflowX: "hidden" }}
+          // style={{ height: "50vh", overflowY: "scroll", overflowX: "hidden" }}
+          style={{ overflowY: "scroll", overflowX: "hidden" }}
+          className="mysplit"
         >
           <Statement
             description={state.problemInfo.description}
@@ -94,16 +68,15 @@ function Left() {
           <Testcase testCases={state.testCases} />
         </Pane>
 
-        <Pane>
+        <Pane className="mysplit2">
           <MyEditor no={no} />
         </Pane>
       </SplitPane>
-      <div style={{background:"black", width:"100%", height:"40px"}}>hi</div>
+      <div className="common_footer">
+        this is footer
+      </div>
     </div>
-
   );
 }
-
-
 
 export default Left;

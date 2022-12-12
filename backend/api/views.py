@@ -16,16 +16,7 @@ import json
 import subprocess
 import pycode_similar
 
-
-# todo: 에러코드 구체화
-# todo: try catch 예외처리
-# todo: CustomUser 바꾸기
-
 class AnswerListAPI(APIView):
-    # def get(self, request):
-    #     answer_list = Answer.objects.all()
-    #     serializer = ProblemListSerializer(answer_list, many=True)
-    #     return Response(serializer.data)
 
     # 문제 답안 등록
     def post(self, request):
@@ -99,11 +90,6 @@ class TestCaseAPI(APIView):
 
 
 class PresetListAPI(APIView):
-    # def get(self, request):
-    #     problem_list = Problem.objects.all()
-    #     serializer = ProblemSerializer(problem_list, many=True)
-    #     return Response(serializer.data)
-
     # 사용자 코드 프리셋 등록
     def post(self, request):
         reqData = request.data
@@ -151,11 +137,13 @@ class PresetAPI(APIView):
 
 
 class ProblemListAPI(APIView):
+    #모든 문제 리스트 조회
     def get(self, request):
         problem_list = Problem.objects.all()
         serializer = ProblemSerializer(problem_list, many=True)
         return Response(serializer.data)
 
+    #문제 리스트에 문제 추가
     def post(self, request):
         serializer = ProblemSerializer(data=request.data)
         if serializer.is_valid():
@@ -222,13 +210,7 @@ class UserRegisterAPI(APIView):
         if user:
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(reqData, status=status.HTTP_400_BAD_REQUEST)
-        # serializer = UsersSerializer(data=reqData)
-        # if serializer.is_valid():
-        #     serializer.save()
-        #     return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
+    
 class loginAPI(APIView):
     # 사용자 로그인
     def post(self, request):
@@ -242,22 +224,6 @@ class loginAPI(APIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(f"login failed", status=status.HTTP_400_BAD_REQUEST)
     
-
-
-#
-# @api_view(['POST'])
-# def loginAPI(request):
-#     if request.method == "POST":
-#         reqData = request.data
-#         email = reqData['email'] #request.POST.get('email') #['email']
-#         #print(f'user email = {email}')
-#         password = reqData['password']
-#         user = authenticate(request, username=email, password=password)
-#         serializer = UsersSerializer(user)
-#         if user :
-#             return Response(serializer.data, status=status.HTTP_200_OK)
-#         return Response(f"login failed", status=status.HTTP_400_BAD_REQUEST)
-
 #@api_view(['POST'])
 class codeTestAPI(APIView):
     def post(self, request):
@@ -351,10 +317,6 @@ class codeTestAPI(APIView):
                         fail_num = res.split(":")[1]
                         fail_reason = responses[i+1]
                         
-                        # fail_split = res.split(" ")
-                        # fail_num = fail_split[0].split(":")[1]
-                        # fail_reason = fail_split[1].split(":")[1]
-                        
                         temp["fail_testcase_num"] = fail_num
                         temp["fail_reasons"] = fail_reason
                         response_dict["fails"].append(temp)
@@ -362,10 +324,6 @@ class codeTestAPI(APIView):
                         temp = {}
                         success_num = res.split(":")[1]
                         usr_output = responses[i+1]
-                        
-                        # fail_split = res.split(" ")
-                        # fail_num = fail_split[0].split(":")[1]
-                        # fail_reason = fail_split[1].split(":")[1]
                         
                         temp["success_testcase_num"] = success_num
                         temp["user_output"] = usr_output
@@ -387,7 +345,6 @@ class codeTestAPI(APIView):
                 #copy detect
                 #ref from https://pypi.org/project/pycode-similar/
                 exit_code, copy_detect_result = subprocess.getstatusoutput(f"pycode_similar {os.getcwd()}/api/userCodeTest/test.py {os.getcwd()}/api/userCodeTest/answer.py")
-                #copy_detect_result = pycode_similar.detect([os.getcwd()+"/api/userCodeTest/test.py", os.getcwd()+"/api/userCodeTest/answer.py"], diff_method=pycode_similar.UnifiedDiff, keep_prints=False, module_level=False)
                 
                 copy_detect_result_list = copy_detect_result.split("\n")
                 print(f'copy_detect_result = {copy_detect_result_list}, type={type(copy_detect_result_list)}')
@@ -397,6 +354,14 @@ class codeTestAPI(APIView):
                 # save to userProblem db
                 userProblem.save()
                 
+                #calculate solved ratio
+                test_users = UserProblems.objects.filter(problem_id=problem_id).values()
+                passed_users = UserProblems.objects.filter(problem_id=problem_id, user_score=1.0).values() 
+                solved_ratio = len(passed_users) / len(test_users)
+                print(f'test_user = {len(test_users)}, passed_user = {len(passed_users)}, solved_ratio = {solved_ratio}')
+                problem.solved_ratio = solved_ratio
+                problem.save()
+                
                 #generate response
                 response_dict["efficiency_score"] = overall_metric_score
                 response_dict["readability_score"] = "-"+str(len(pylama_error_list))
@@ -405,14 +370,87 @@ class codeTestAPI(APIView):
                 return Response(response_dict, status=status.HTTP_200_OK)
                         
             except docker.errors.ContainerError as error:
-                #responses = error.split("\n")
-                #print(responses)
                 response_dict['status']="failed"
                 response_dict['reason']=str(error)
                 print(error)
                 return Response(response_dict, status=status.HTTP_400_BAD_REQUEST)
                 print("error")
             
+class consoleTestAPI(APIView):
+    def post(self, request):
+        if request.method == "POST":
+            #init docker client:
+            client = docker.from_env()
+
+            #get user code from post req body
+            reqData = request.data
+            userCode = reqData['user_code']
+            user_id = reqData['user_id']
+            problem_id = reqData['problem_id']
+
+            #make user code py file
+            print("\n\nWorking on " +os.getcwd()+"\n\n")
+            tf = open("./api/userCodeTest/test.py", 'w')
+            tf.write(userCode)
+            tf.close()
+
+
+            #get the problem's testcase
+            problem = Problem.objects.get(id=problem_id)
+            user = get_user_model().objects.get(id=user_id)
+            testCases = testCase.objects.filter(problem=problem)
+            userProblem, created = UserProblems.objects.get_or_create(user=user, problem=problem)   
+
+            #generate unittest code
+            testcase_file = open("./api/userCodeTest/testconsole_run.py", 'w')
+            testcase_init_list = ["import unittest\n","import test\n" "import traceback\n","class solutionTest(unittest.TestCase):\n"]
+            testcase_file.writelines(testcase_init_list)
             
+            testcase_file.write(f"\ttry:\n")
+            testcase_file.write(f"\t\timport test\n")
+            testcase_file.write(f"\texcept Exception as error:\n")
+            testcase_file.write(f"\t\tprint('fail:0')\n")
+            testcase_file.write(f"\t\tprint(error)\n")
+            testcase_file.write(f"\t\texit(1)\n\n")
             
+            testcase_file.write(f"\tdef console_test():\n")
             
+            for i, test_case in enumerate(testCases):
+                testcase_file.write(f"\t\ttry:\n")
+                testcase_file.write(f"\t\t\tprint(test.solution({test_case.testCase_in[1:-1]}))\n")
+                
+                testcase_file.write(f"\t\texcept Exception as error:\n")
+                testcase_file.write(f"\t\t\tprint(error)\n")
+                
+                
+            
+            testcase_close_list = ["if __name__ == '__main__':\n", "\tsolutionTest.console_test()\n"]
+            testcase_file.writelines(testcase_close_list)
+            testcase_file.close()
+            
+
+            #build docker file
+            dockerfile_path='./api/userCodeTest/dockerfile_console'
+            dockerfile_dir = os.path.dirname(dockerfile_path)
+
+            test_docker_img, json_file = client.images.build(path=dockerfile_dir, dockerfile="dockerfile_console")
+
+            
+            response=""
+            response_dict = {}
+            
+            #test result
+            try:
+                response_dict['status']="succeed"
+                response = client.containers.run(test_docker_img,stdout=True,stderr=True, remove=True)
+                response = response.decode('utf-8')
+                responses = response.split('\n')
+                print(f'responses= {responses}')
+                response_dict["stdout"] = response
+                response_dict["stdout_list"] = responses
+                
+                return Response(response_dict, status=status.HTTP_200_OK)
+                        
+            except docker.errors.ContainerError as error:
+                response_dict['status']="failed"
+                response_dict['reason']=str(error)

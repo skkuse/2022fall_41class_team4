@@ -1,11 +1,7 @@
 from django.db import models
-
 from rest_framework import serializers
 from .models import *
 
-
-
-#todo: base 앞에 붙이느냐 - 네이밍
 class testCaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = testCase
@@ -13,14 +9,11 @@ class testCaseSerializer(serializers.ModelSerializer):
         
 
 class ProblemSerializer(serializers.ModelSerializer):
-    # testCases = testCaseSerializer(many=True)
     class Meta:
         model = Problem
-        fields = ('id', 'name', 'hardness', 'solved_ratio', 'description', 'restrictions')
+        fields = ('id', 'name', 'hardness', 'solved_ratio', 'description', 'restrictions','reference')
 
 
-
-# todo: problem ? problem_id ?
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer

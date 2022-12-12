@@ -245,3 +245,6 @@ body {
   width: auto;
   overflow: auto;
 }
+.bigtabs {
+  width: 98.5%;
+}

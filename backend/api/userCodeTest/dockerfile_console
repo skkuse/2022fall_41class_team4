@@ -4,8 +4,8 @@ WORKDIR /usr/app/src
 
 COPY test.py ./
 
-COPY testcases_run.py ./
+COPY testconsole_run.py ./
 
 COPY . .
 
-CMD [ "python", "./testcases_run.py"]
+CMD [ "python", "./testconsole_run.py"]

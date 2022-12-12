@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import Popup from "./Popup";
 import Header from "./Header";
+import CommonHeader_blank from "./CommonHeader_blank"
 
 class Login extends React.Component {
   constructor(props) {
@@ -57,7 +58,8 @@ class Login extends React.Component {
   render() {
     return (
       <div className="login_total_container">
-        <Header />
+        {/* <Header /> */}
+        <CommonHeader_blank/>
         <div className="login_container">
           <div className="Login">
             <Form id="form">

@@ -1,0 +1,35 @@
+.testcase {
+  
+  float:left;
+  margin-top:1vh;
+  margin-right: 10vw;
+}
+.comp{
+  margin-top:1vh;
+  float:left;
+  
+}
+.results {
+  margin-top:1vh;
+  float: right;
+  margin-right: 5vw;
+}
+.leftheader {
+  
+  height:5vh;
+  margin-bottom: 5vh;
+  background-color: #a8c860;
+}
+.theader1{
+  margin-top:1vh;
+  margin-left: 24vw;
+  margin-right: 10vw;
+  text-align:center;
+}
+.theader{
+  margin-top:1vh;
+  margin-right: 5vw;
+}
+.compare{
+  margin-top:1vh;
+}
