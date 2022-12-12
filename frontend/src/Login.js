@@ -96,6 +96,7 @@ class Login extends React.Component {
 
             <Button
               id="button"
+              class = "login_btn"
               block
               size="lg"
               onClick={() => this.handleClick()}

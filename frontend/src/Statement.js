@@ -10,12 +10,13 @@ class Statement extends Component {
                     문제 설명
                 </div>
                 <div className="left-content">
-                    <b>문제</b>
-                    <div>
+                    <b style={{fontSize:"20px"}}>문제</b>
+                    <div style={{fontSize:"17px", paddinLeft:"5px"}}>
                         {this.props.description}
                     </div>
-                    <b>제약사항</b>
-                    <div>
+                    <br/>
+                    <b style={{fontSize:"20px", marginTop:"25px"}}>제약사항</b>
+                    <div style={{fontSize:"17px", paddinLeft:"5px"}}>
                         {this.props.restrictions}
                     </div>
                 </div>

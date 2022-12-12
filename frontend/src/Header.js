@@ -23,7 +23,7 @@ class Header extends React.Component {
           >
             코딩테스트 연습
           </Typography>
-          <Button color="inherit">{this.props.name}</Button>
+          <Button color="inherit" class="username">{this.props.name}</Button>
         </Toolbar>
       </AppBar>
     );

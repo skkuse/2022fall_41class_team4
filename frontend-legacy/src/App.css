@@ -122,6 +122,9 @@ body {
   color: grey;
   text-decoration: underline;
 }
+.search{
+  border:1px solid black;
+}
 #del {
   margin-top: 1vh;
   height: auto;

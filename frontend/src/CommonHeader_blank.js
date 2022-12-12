@@ -11,7 +11,7 @@ class CommonHeader extends React.Component {
             <a href={"/Problemlist?id="+this.props.id+"&username="+this.props.username}>
                 <div className="home_button">
                 <img className="skku" alt="skku" src={skku_icon} />
-                <div>코딩테스트 연습</div>
+                <div  style={{minWidth:"200px"}} >코딩테스트 연습</div>
                 </div>
             </a>
             <div className="common_header_space1" />

@@ -6,6 +6,7 @@
   float: right;
 }
 img {
+  cursor:pointer;
   width: 2vh;
   height: 2vh;
   margin: 2vh;
@@ -82,4 +83,6 @@ img {
   border-top: 1px solid #D1D1D1;
   padding-top: 4px;
   padding-bottom: 4px;
+  /*pointer:cursor;*/
+  cursor:pointer;
 }
