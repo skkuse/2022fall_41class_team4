@@ -10,7 +10,7 @@ class CommonHeader extends React.Component {
         <div className="common_header_login">
             <a href={"/Problemlist?id="+this.props.id+"&username="+this.props.username}>
                 <div className="home_button">
-                <img className="skku" alt="skku" src={skku_icon} />
+                <img className="skku" alt="skku" src={skku_icon}  style={{minWidth:"200px"}} />
                 <div>코딩테스트 연습</div>
                 </div>
             </a>
